@@ -4,12 +4,11 @@
 
 <html>
 <head runat="server">
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-           <meta charset="utf-8">
+    <title>Loss Aversion</title>
+
+    <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Knight Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -30,6 +29,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+           
     </asp:ContentPlaceHolder>
 </head>
 <body>
