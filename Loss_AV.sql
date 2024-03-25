@@ -1,0 +1,25 @@
+CREATE TABLE TBL_User (
+    User_ID NCHAR(255) PRIMARY KEY NOT NULL,
+    Username NCHAR(255) NOT NULL
+);
+
+CREATE TABLE TBL_Loss_AV (
+    LossAV_ID NCHAR(255) PRIMARY KEY NOT NULL,
+    Decision1 BIT NOT NULL,
+	Outcome1 INT NOT NULL,
+    Decision2 BIT NOT NULL,
+	Outcome2 INT NOT NULL,
+    Decision3 BIT NOT NULL,
+	Outcome3 INT NOT NULL,
+    Decision4 BIT NOT NULL,
+	Outcome4 INT NOT NULL,
+    Decision5 BIT NOT NULL,
+	Outcome5 INT NOT NULL,
+    Decision6 BIT NOT NULL,
+	Outcome6 INT NOT NULL,
+    Final_Score INT NOT NULL,
+    User_ID NCHAR(255) NOT NULL,
+    FOREIGN KEY (User_ID) REFERENCES TBL_User(User_ID) 
+);
+
+
