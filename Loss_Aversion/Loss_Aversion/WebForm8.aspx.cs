@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Loss_Aversion
 {
@@ -11,17 +10,46 @@ namespace Loss_Aversion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["Score"] == null)
+                {
+                    Session["Score"] = 300;
+                }
+            }
         }
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm9.aspx");
+            Response.Redirect("WebForm2.aspx");
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm9.aspx");
+            InsertIntoDatabase();
+            Session["Username"] = txtname.Text; //session
+            Response.Redirect("WebForm2.aspx");
+        }
+
+        private void InsertIntoDatabase()
+        {
+
+            string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                connection.Open();
+                string query = "UPDATE TBL_Loss_AV SET Username = @Username WHERE LossAV_ID = @LossAV_ID";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@LossAV_ID", Session["SessionID"]);
+                command.Parameters.AddWithValue("@Username", txtname.Text);
+
+                command.ExecuteNonQuery();
+
+
+            }
         }
     }
 }
