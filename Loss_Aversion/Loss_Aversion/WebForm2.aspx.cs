@@ -23,11 +23,9 @@ namespace Loss_Aversion
 
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
-            // Update score and store in session
             ScoreManager.AvoidLoss();
             Session["Score"] = ScoreManager.GetScore();
 
-            // Insert decision and outcome into database
             InsertIntoDatabase(false);
 
             Response.Redirect("WebForm3.aspx");
@@ -35,11 +33,9 @@ namespace Loss_Aversion
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            // Update score and store in session
             ScoreManager.Gain();
             Session["Score"] = ScoreManager.GetScore();
 
-            // Insert decision and outcome into database
             InsertIntoDatabase(true);
 
             Response.Redirect("WebForm3.aspx");
@@ -49,21 +45,21 @@ namespace Loss_Aversion
         {
             using (SqlConnection connection = new SqlConnection(connString))
             {
+                connection.Open();
+
                 string query = "INSERT INTO TBL_Loss_AV (Decision1, Outcome1) VALUES (@Decision1, @Outcome1)";
 
                 SqlCommand command = new SqlCommand(query, connection);
+
                 command.Parameters.AddWithValue("@Decision1", decision);
                 command.Parameters.AddWithValue("@Outcome1", Session["Score"]);
 
-                try
-                {
-                    connection.Open();
+
+
+
+
                     command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+
             }
         }
     }

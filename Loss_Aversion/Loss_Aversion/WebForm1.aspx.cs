@@ -26,7 +26,7 @@ namespace Loss_Aversion
 
         protected void btnNext_Click1(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm2.aspx");
+            Response.Redirect("WebForm8.aspx");
         }
     }
 }
