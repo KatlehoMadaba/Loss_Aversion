@@ -5,14 +5,15 @@
 
  <section id="hero">
         <div class="hero-container">
-         <h1 data-aos="zoom-in" class="boldHeader"> Aversion Game</h1>
+         <h1 data-aos="zoom-in" class="boldHeader">Loss Aversion Game</h1>
+            <h2 data-aos="fade-up" class="glowHeading fs-4">Potential Gains: R300-R700</h2>
             <div class="card" style="width: 60%;  box-shadow: 0 0 20px #00FF00" data-aos="fade-up">
                 <div class="card-header">
                     <p class="fw-bold fs-2">A promising tech company is going public, and you have the chance to invest in it.</p>
                 </div>
                 <div class="card-body" data-aos="fade-up">
                     <asp:Button ID="btnAlosses" runat="server" CssClass="btn btn-success btn-Alosses" Text="Avoid Losses" Width="212px" OnClick="btnAlosses_Click" />
-                    <asp:Button ID="btnGains" runat="server" CssClass="btn btn-success btn-Gains" Text="Gains" Width="212px" OnClick="btnGains_Click" />
+                    <asp:Button ID="btnGains" runat="server" CssClass="btn btn-success btn-Gains" Text="Gamble" Width="212px" OnClick="btnGains_Click" />
                 </div>
             </div>
         </div>
