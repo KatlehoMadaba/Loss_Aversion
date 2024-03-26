@@ -6,8 +6,8 @@
 * License: https://bootstrapmade.com/license/
 */
 window.onload = function () {
-    var width = window.innerWidth * 0.5; // Calculate 60% of the screen width
-    var height = window.innerHeight * 0.5; // Calculate 60% of the screen height
+    var width = window.innerWidth * 0.1; // Calculate 60% of the screen width
+    var height = window.innerHeight * 0.1; // Calculate 60% of the screen height
     window.resizeTo(width, height);
 };
 
