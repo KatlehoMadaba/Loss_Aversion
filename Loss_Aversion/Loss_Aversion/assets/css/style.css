@@ -9,9 +9,195 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+/* Add to your existing CSS */
+.game-display {
+    width: 320px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #111; /* Dark background for a game-like feel */
+    border: 2px solid #00FF00; /* Neon green, typical for sci-fi or cyberpunk games */
+    border-radius: 10px; /* Slightly larger radius for a softer look */
+    box-shadow: 0 0 20px #00FF00; /* Glowing effect */
+    color: #fff; /* White text color for better readability on dark backgrounds */
+    font-family: 'Orbitron', sans-serif; /* A more futuristic font, suitable for game interfaces */
+    text-align: center;
+    position: relative; /* Required for potential pseudo-elements */
+    overflow: hidden; /* Ensures that the border glow doesn't bleed outside the box */
+}
+
+    .game-display:before, .game-display:after {
+        content: '';
+        position: absolute;
+        top: -2px; /* Aligns with the border */
+        left: -2px; /* Aligns with the border */
+        background: linear-gradient(45deg, rgba(0, 255, 0, 0.6), rgba(0, 200, 0, 0.8), rgba(0, 255, 0, 0.6), rgba(0, 200, 0, 0.8));
+        background-size: 400% 400%;
+        width: calc(100% + 4px); /* Compensates for the negative positioning */
+        height: calc(100% + 4px); /* Compensates for the negative positioning */
+        z-index: -1;
+        animation: movingGlow 8s linear infinite;
+        border-radius: 10px; /* Matches the .game-display border-radius */
+    }
+
+@keyframes movingGlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Add this to your existing .typewriter styles for consistency */
+.game-display .typewriter h2, .game-display .typewriter p {
+    color: #fff; /* Ensuring text is visible against the darker background */
+}
+
+.game-button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* No border */
+    color: white; /* White text */
+    padding: 15px 32px; /* Padding for size */
+    text-align: center; /* Center text */
+    text-decoration: none; /* No underline */
+    display: inline-block; /* Allows setting width and height */
+    font-size: 16px; /* Text size */
+    font-family: 'Orbitron', sans-serif; /* Futuristic font */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Cursor indicates clickable item */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 9px #999; /* Shadow for 3D effect */
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1); /* Smooth transition for button press and hover */
+}
+
+    .game-button:hover {
+        background-color: #3e8e41; /* Darker shade of green */
+        box-shadow: 0 5px #666; /* Shadow moves up to create pressed effect */
+        transform: translateY(4px); /* Button moves down slightly */
+    }
+
+    .game-button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 2px #666; /* More pronounced shadow to give a sense of depth */
+        transform: translateY(6px); /* Button moves further down */
+    }
+.game-display {
+    width: 320px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #111; /* Dark background for a game-like feel */
+    border: 2px solid #00FF00; /* Neon green, typical for sci-fi or cyberpunk games */
+    border-radius: 10px; /* Slightly larger radius for a softer look */
+    box-shadow: 0 0 20px #00FF00; /* Glowing effect */
+    color: #fff; /* White text color for better readability on dark backgrounds */
+    font-family: 'Orbitron', sans-serif; /* A more futuristic font, suitable for game interfaces */
+    text-align: center;
+    position: relative; /* Required for potential pseudo-elements */
+    overflow: hidden; /* Ensures that the border glow doesn't bleed outside the box */
+}
+
+.game-display:before, .game-display:after {
+    content: '';
+    position: absolute;
+    top: -2px; /* Aligns with the border */
+    left: -2px; /* Aligns with the border */
+    background: linear-gradient(45deg, rgba(0, 255, 0, 0.6), rgba(0, 200, 0, 0.8), rgba(0, 255, 0, 0.6), rgba(0, 200, 0, 0.8));
+    background-size: 400% 400%;
+    width: calc(100% + 4px); /* Compensates for the negative positioning */
+    height: calc(100% + 4px); /* Compensates for the negative positioning */
+    z-index: -1;
+    animation: movingGlow 8s linear infinite;
+    border-radius: 10px; /* Matches the .game-display border-radius */
+}
+
+@keyframes movingGlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Add this to your existing .typewriter styles for consistency */
+.game-display .typewriter h2, .game-display .typewriter p {
+    color: #fff; /* Ensuring text is visible against the darker background */
+}
+.typewriter h2, .typewriter p {
+    overflow: hidden; /* Ensures the content is not visible until it is animated */
+    border-right: .15em solid #00FF00; /* The typewriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjusts the spacing between letters */
+    animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+}
+
+/* Typing keyframe */
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}
+
+/* Blinking cursor keyframe */
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: #00FF00;
+    }
+}
+.display-box {
+    width: 60%; /* Width of the box */
+    margin: 20px auto; /* Centering the box */
+    padding: 2px; /* Reduced padding to decrease height */
+    background-color: #f0f0f0; /* Background color of the box */
+    border: 1px solid #00FF00; /* Green border around the box */
+    border-radius: 5px; /* Rounded corners of the box */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    text-align: center; /* Centering the text */
+}
+    .glowHeading {
+        margin-top: 0;
+        color: #333; /* Color of the title */
+        text-shadow: 0 0 8px #00FF00; /* Green glow effect */
+    }
+    .display-box p {
+        color: #666; /* Color of the text */
+        line-height: 1.5; /* Line height of the text */
+        margin-top: 10px; /* Reduced space to decrease overall height, adjust as needed */
+        margin-bottom: 10px; /* Reduced space to decrease overall height, adjust as needed */
+    }
+
+.boldHeader {
+    /*font-size: 24px;*/ /* Adjust the size as needed */
+    /*font-weight: bold;
+    font-family: ;*/ /* Example font */
+    /*color: #333;*/ /* Adjust the color as needed */
+    /*text-shadow: 0 0 8px #00FF00;*/ /* Green glow effect, matching the box's outline */
+    font-family: "Rubik Dirt", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
 body {
-  font-family: "Open Sans", sans-serif;
-  color: #555555;
+    font-family: "Open Sans", sans-serif;
+    color: #555555;
 }
 
 a {
