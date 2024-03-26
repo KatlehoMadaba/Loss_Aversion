@@ -16,7 +16,7 @@
                 <div class="card-header" style="box-shadow: 0 0 20px #00FF00; /* Glowing effect */">
                     <div class="fs-3 fw-bold">
                     <h2 id="typed-title"></h2>
-                    <p id="typed-text"></p>
+                    <p style="font-size: 15px"  id="typed-text"></p>
                     </div>
                  <%--   <p class="fw-bold fs-2" >There are rumors circulating about a potential merger involving a company you've invested in.</p>--%>
                 </div>
