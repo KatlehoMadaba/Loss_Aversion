@@ -79,7 +79,6 @@ namespace Loss_Aversion
 
             public static void AvoidLoss()
             {
-                score -= rnd.Next(100, 700);
 
             }
 
@@ -87,7 +86,7 @@ namespace Loss_Aversion
             {
                 // Randomly determine whether to gain or lose points
 
-                score += rnd.Next(100, 700);
+                score += rnd.Next(-300, 700);
 
             }
         }

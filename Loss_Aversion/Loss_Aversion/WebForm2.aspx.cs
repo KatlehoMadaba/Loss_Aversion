@@ -88,14 +88,13 @@ namespace Loss_Aversion
             public static void AvoidLoss()
             {
                 int score = GetScore();
-                score -= rnd.Next(100, 700);
                 HttpContext.Current.Session["Score"] = score;
             }
 
             public static void Gain()
             {
                 int score = GetScore();
-                score += rnd.Next(100, 700);
+                score += rnd.Next(-300, 700);
                 HttpContext.Current.Session["Score"] = score;
             }
         }

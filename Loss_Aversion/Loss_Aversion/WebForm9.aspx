@@ -9,6 +9,7 @@
             <div class="card" style="width: 60%;  box-shadow: 0 0 20px #00FF00" data-aos="fade-up">
                 <div class="card-header">
                     <p class="fw-bold fs-2">Your Results:</p>
+                    <asp:Label ID="lblResults" class="fw-bold fs-2" runat="server"></asp:Label>
                 </div>
             </div>
         </div>
