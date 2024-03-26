@@ -7,7 +7,24 @@
 */
 
 (function () {
-    const titleText = "Lets Understand the Game first";
+    const textsToType = [
+        { elementId: "typed-title", text: "Lets Understand the Game first", delay: 150 },
+        { elementId: "typed-text", text: "In this challenge, You'll encounter situations...", delay: 50 }
+    ];
+
+    function typeAllTexts(textArray) {
+        let totalDelay = 0;
+        textArray.forEach(item => {
+            setTimeout(() => { typeOutText(item.elementId, item.text, item.delay); }, totalDelay);
+            totalDelay += item.text.length * item.delay;
+        });
+    }
+
+    window.onload = function () {
+        typeAllTexts(textsToType);
+    };
+   const name = "Please enter your name:"
+   const titleText = "Lets Understand the Game first"
     const bodyText = "In this challenge, You'll encounter situations where you can earn points or steer clear of potential losses. " +
         "The key is to think strategically and make decisions that boost your score the most. " +
         "You have R300 as your start-up.";
@@ -27,6 +44,7 @@
     window.onload = function () {
         typeOutText("typed-title", titleText, 150); // Adjust timing as needed
         setTimeout(() => { typeOutText("typed-text", bodyText, 50); }, titleText.length * 150); // Starts after the title has finished
+
     };
   "use strict";
 

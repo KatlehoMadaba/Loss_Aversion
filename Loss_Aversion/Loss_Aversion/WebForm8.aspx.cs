@@ -13,5 +13,15 @@ namespace Loss_Aversion
         {
 
         }
+
+        protected void btnGains_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebForm9.aspx");
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("WebForm9.aspx");
+        }
     }
 }

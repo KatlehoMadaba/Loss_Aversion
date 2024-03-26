@@ -10,6 +10,22 @@
 # General
 --------------------------------------------------------------*/
 /* Add to your existing CSS */
+.line-input {
+    border: none; /* Removes the default border */
+    border-bottom: 1px solid #ffffff; /* Adds a black line at the bottom */
+    outline: none; /* Removes the outline on focus */
+    width: 50%; /* Sets the width to fill the container */
+}
+
+    .line-input:focus {
+        border-bottom: 2px solid #fff; /* Changes the line color to blue when focused */
+    }
+#typed-text{
+
+}
+#typed-title{
+
+}
 .game-display {
     width: 320px;
     margin: 20px auto;
