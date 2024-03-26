@@ -4,6 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section id="hero">
         <div class="hero-container">
+            <h1 data-aos="zoom-in" class="boldHeader">Game Over !</h1>
          <h1 data-aos="zoom-in" class="boldHeader"> Aversion Game</h1>
             <div class="card" style="width: 60%;  box-shadow: 0 0 20px #00FF00" data-aos="fade-up">
                 <div class="card-header">

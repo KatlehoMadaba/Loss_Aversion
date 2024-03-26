@@ -5,8 +5,14 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+window.onload = function () {
+    var width = window.innerWidth * 0.5; // Calculate 60% of the screen width
+    var height = window.innerHeight * 0.5; // Calculate 60% of the screen height
+    window.resizeTo(width, height);
+};
 
 (function () {
+  
     const textsToType = [
         { elementId: "typed-title", text: "Lets Understand the Game first", delay: 150 },
         { elementId: "typed-text", text: "In this challenge, You'll encounter situations...", delay: 50 }
