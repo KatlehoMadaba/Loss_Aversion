@@ -11,7 +11,7 @@
                     <img src="assets/img/hero-logo.png" alt="herePng"></a>
                 <h1 data-aos="zoom-in" class="boldHeader">Welcome To </h1>
                 <h1 data-aos="zoom-in" class="boldHeader"> Loss Aversion Game</h1>
-                <h2 data-aos="fade-up" class="glowHeading">Get for the Loss Aversion Game!</h2>
+                <h2 data-aos="fade-up" class="glowHeading">Get ready for the Loss Aversion Game!</h2>
                  <div class="card" style="width: 60%;">
                 <div class="card-header" style="box-shadow: 0 0 20px #00FF00; /* Glowing effect */">
                     <div class="fs-3 fw-bold">
