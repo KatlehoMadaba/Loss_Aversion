@@ -157,6 +157,7 @@
     <Content Include="assets\vendor\php-email-form\validate.js" />
     <Content Include="assets\vendor\swiper\swiper-bundle.min.css" />
     <Content Include="assets\vendor\swiper\swiper-bundle.min.js" />
+    <Content Include="StyleSheet1.css" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
