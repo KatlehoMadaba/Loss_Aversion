@@ -26,7 +26,7 @@ namespace Loss_Aversion
             ScoreManager.AvoidLoss();
             Session["Score"] = ScoreManager.GetScore();
 
-            InsertIntoDatabase(false);
+            UpdateDatabase(false, Session["SessionID"].ToString());
 
             Response.Redirect("WebForm3.aspx");
         }
@@ -36,14 +36,13 @@ namespace Loss_Aversion
             ScoreManager.Gain();
             Session["Score"] = ScoreManager.GetScore();
 
-            InsertIntoDatabase(true);
+            UpdateDatabase(true, Session["SessionID"].ToString());
 
             Response.Redirect("WebForm3.aspx");
         }
 
-        private void InsertIntoDatabase(bool decision)
+        private void UpdateDatabase(bool decision, string userId)
         {
-
             string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
             using (SqlConnection connection = new SqlConnection(connString))
@@ -51,18 +50,30 @@ namespace Loss_Aversion
                 connection.Open();
 
 
+                
 
-                string query = "INSERT INTO TBL_Loss_AV (Decision1, Outcome1) VALUES (@Decision1, @Outcome1)";
+
+
+
+                string query = "UPDATE TBL_Loss_AV " +
+                               "SET Decision1 = @Decision1, Outcome1 = @Outcome1" +
+                               " WHERE LossAV_ID = @LossAV_ID";
+                
+
 
                 SqlCommand command = new SqlCommand(query, connection);
 
-                command.Parameters.AddWithValue("@Decision1", decision);
-                command.Parameters.AddWithValue("@Outcome1", Session["Score"]);
+
+                command.Parameters.AddWithValue("@Decision1", decision.ToString());
+                command.Parameters.AddWithValue("@Outcome1", Session["Score"].ToString());
+                command.Parameters.AddWithValue("@LossAV_ID", userId);
+
+
+
 
                 command.ExecuteNonQuery();
 
             }
-
         }
 
         public static class ScoreManager

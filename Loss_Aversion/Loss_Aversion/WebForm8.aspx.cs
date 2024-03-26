@@ -21,32 +21,34 @@ namespace Loss_Aversion
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm3.aspx");
+            Response.Redirect("WebForm2.aspx");
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
             InsertIntoDatabase();
             Session["Username"] = txtname.Text; //session
-            Response.Redirect("WebForm3.aspx");
+            Response.Redirect("WebForm2.aspx");
         }
 
         private void InsertIntoDatabase()
         {
-
-            String userID = Guid.NewGuid().ToString();
-            Session["UserID"] = userID;
 
             string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
-                string query = "INSERT INTO TBL_User (User_ID,Username) VALUES (@UserID,@Username)";
+                string query = "UPDATE TBL_Loss_AV SET Username = @Username WHERE LossAV_ID = @LossAV_ID";
+
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@UserID", userID);
+
+                command.Parameters.AddWithValue("@LossAV_ID", Session["SessionID"]);
                 command.Parameters.AddWithValue("@Username", txtname.Text);
+
                 command.ExecuteNonQuery();
+
+
             }
         }
     }

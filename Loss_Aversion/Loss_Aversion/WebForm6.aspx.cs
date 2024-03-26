@@ -28,7 +28,7 @@ namespace Loss_Aversion
             ScoreManager.AvoidLoss();
             Session["Score"] = ScoreManager.GetScore();
 
-            UpdateDatabase(false, Session["UserID"].ToString());
+            UpdateDatabase(false, Session["SessionID"].ToString());
 
             Response.Redirect("WebForm7.aspx");
         }
@@ -38,7 +38,7 @@ namespace Loss_Aversion
             ScoreManager.Gain();
             Session["Score"] = ScoreManager.GetScore();
 
-            UpdateDatabase(true, Session["UserID"].ToString());
+            UpdateDatabase(true, Session["SessionID"].ToString());
 
             Response.Redirect("WebForm7.aspx");
         }
@@ -53,7 +53,7 @@ namespace Loss_Aversion
 
                 string query = "UPDATE TBL_Loss_AV " +
                                "SET Decision5 = @Decision5, Outcome5 = @Outcome5 " +
-                               "WHERE User_ID = @UserID";
+                               "WHERE LossAV_ID = @UserID";
 
                 SqlCommand command = new SqlCommand(query, connection);
 

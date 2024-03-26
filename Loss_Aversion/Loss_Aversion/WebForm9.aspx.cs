@@ -11,7 +11,7 @@ namespace Loss_Aversion.assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblResults.Text = Session["Score"].ToString();
         }
     }
 }
