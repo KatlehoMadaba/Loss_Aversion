@@ -6,7 +6,28 @@
 * License: https://bootstrapmade.com/license/
 */
 
-(function() {
+(function () {
+    const titleText = "Lets Understand the Game first";
+    const bodyText = "In this challenge, You'll encounter situations where you can earn points or steer clear of potential losses. " +
+        "The key is to think strategically and make decisions that boost your score the most. " +
+        "You have R300 as your start-up.";
+
+    function typeOutText(elementId, text, delay) {
+        let i = 0;
+        function typing() {
+            if (i < text.length) {
+                document.getElementById(elementId).innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typing, delay);
+            }
+        }
+        typing();
+    }
+
+    window.onload = function () {
+        typeOutText("typed-title", titleText, 150); // Adjust timing as needed
+        setTimeout(() => { typeOutText("typed-text", bodyText, 50); }, titleText.length * 150); // Starts after the title has finished
+    };
   "use strict";
 
   /**
