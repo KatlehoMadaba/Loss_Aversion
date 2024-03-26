@@ -8,7 +8,7 @@ namespace Loss_Aversion
 {
     public partial class WebForm2 : System.Web.UI.Page
     {
-        string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,7 +16,7 @@ namespace Loss_Aversion
             {
                 if (Session["Score"] == null)
                 {
-                    Session["Score"] = 300; 
+                    Session["Score"] = 300;
                 }
             }
         }
@@ -43,9 +43,14 @@ namespace Loss_Aversion
 
         private void InsertIntoDatabase(bool decision)
         {
+
+            string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
+
+
 
                 string query = "INSERT INTO TBL_Loss_AV (Decision1, Outcome1) VALUES (@Decision1, @Outcome1)";
 
@@ -54,37 +59,34 @@ namespace Loss_Aversion
                 command.Parameters.AddWithValue("@Decision1", decision);
                 command.Parameters.AddWithValue("@Outcome1", Session["Score"]);
 
-
-
-
-
-                    command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
 
             }
-        }
-    }
 
-    public static class ScoreManager
-    {
-        private static Random rnd = new Random();
-
-        public static int GetScore()
-        {
-            return Convert.ToInt32(HttpContext.Current.Session["Score"]);
         }
 
-        public static void AvoidLoss()
+        public static class ScoreManager
         {
-            int score = GetScore();
-            score -= rnd.Next(100, 700);
-            HttpContext.Current.Session["Score"] = score;
-        }
+            private static Random rnd = new Random();
 
-        public static void Gain()
-        {
-            int score = GetScore();
-            score += rnd.Next(100, 700);
-            HttpContext.Current.Session["Score"] = score;
+            public static int GetScore()
+            {
+                return Convert.ToInt32(HttpContext.Current.Session["Score"]);
+            }
+
+            public static void AvoidLoss()
+            {
+                int score = GetScore();
+                score -= rnd.Next(100, 700);
+                HttpContext.Current.Session["Score"] = score;
+            }
+
+            public static void Gain()
+            {
+                int score = GetScore();
+                score += rnd.Next(100, 700);
+                HttpContext.Current.Session["Score"] = score;
+            }
         }
     }
 }

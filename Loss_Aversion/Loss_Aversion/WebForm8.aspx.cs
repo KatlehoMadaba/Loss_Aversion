@@ -33,13 +33,18 @@ namespace Loss_Aversion
 
         private void InsertIntoDatabase()
         {
+
+            String userID = Guid.NewGuid().ToString();
+            Session["UserID"] = userID;
+
             string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
-                string query = "INSERT INTO TBL_User (Username) VALUES (@Username)";
+                string query = "INSERT INTO TBL_User (User_ID,Username) VALUES (@UserID,@Username)";
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@UserID", userID);
                 command.Parameters.AddWithValue("@Username", txtname.Text);
                 command.ExecuteNonQuery();
             }
