@@ -10,19 +10,12 @@ namespace Loss_Aversion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (Session["Score"] == null)
-                {
-                    Session["Score"] = 300;
-                }
-            }
+         
+
+            //set the score session 
         }
 
-        protected void btnGains_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("WebForm2.aspx");
-        }
+        
 
         protected void btnNext_Click(object sender, EventArgs e)
         {

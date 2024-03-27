@@ -2647,7 +2647,7 @@ return Item;
     var colGroup = [];
     // how many different places could this brick fit horizontally
     var groupCount = this.cols + 1 - colSpan;
-    // for each group potential horizontal position
+    // for each group Potential  horizontal position
     for ( var i = 0; i < groupCount; i++ ) {
       colGroup[i] = this._getColGroupY( i, colSpan );
     }

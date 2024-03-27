@@ -37,7 +37,7 @@
     color: #fff; /* White text color for better readability on dark backgrounds */
     font-family: 'Orbitron', sans-serif; /* A more futuristic font, suitable for game interfaces */
     text-align: center;
-    position: relative; /* Required for potential pseudo-elements */
+    position: relative; /* Required for Potential  pseudo-elements */
     overflow: hidden; /* Ensures that the border glow doesn't bleed outside the box */
 }
 
@@ -113,7 +113,7 @@
     color: #fff; /* White text color for better readability on dark backgrounds */
     font-family: 'Orbitron', sans-serif; /* A more futuristic font, suitable for game interfaces */
     text-align: center;
-    position: relative; /* Required for potential pseudo-elements */
+    position: relative; /* Required for Potential  pseudo-elements */
     overflow: hidden; /* Ensures that the border glow doesn't bleed outside the box */
 }
 

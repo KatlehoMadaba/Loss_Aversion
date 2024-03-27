@@ -14,13 +14,12 @@ namespace Loss_Aversion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (Session["Score"] == null)
-                {
-                    Session["Score"] = 300;
-                }
-            }
+
+            double amount = Class1.Balance();
+            double roundedAmount = Math.Round(amount, 2);
+            Bettedamountlb.Text = roundedAmount.ToString();
+            W_Lamountlb.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
+            potentialGainlb.Text = Math.Round(Class1.potentialWin(5), 2).ToString();
         }
 
         protected void btnAlosses_Click(object sender, EventArgs e)
@@ -35,10 +34,10 @@ namespace Loss_Aversion
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            ScoreManager.Gain();
-            Session["Score"] = ScoreManager.GetScore();
-
-            UpdateDatabase(true, Session["SessionID"].ToString());
+            //ScoreManager.Gain();
+            //Session["Score"] = ScoreManager.GetScore();
+            Class1.Bet(5);
+           
 
             Response.Redirect("WebForm9.aspx");
         }

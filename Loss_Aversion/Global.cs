@@ -5,12 +5,12 @@ public class Class1
 	public Class1()
 	{
 	}
-    public static decimal expected_win_amount(double probability,double betAmount)
+    public static decimal expected_win_amount(double probability,double Balance)
     {
         decimal expected_amount = 0;
         double P_l = 1 - probability;
-        double A_W=betAmount+(betAmount/probability)-betAmount;
-        double A_1 = betAmount;
+        double A_W=Balance+(Balance/probability)-Balance;
+        double A_1 = Balance;
         double EV =((probability*A_W)-(P_l*A_1))
         return expected_amount;
     }

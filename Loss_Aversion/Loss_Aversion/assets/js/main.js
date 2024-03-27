@@ -31,7 +31,7 @@ window.onload = function () {
     };
    const name = "Please enter your name:"
    const titleText = "Lets Understand the Game first"
-    const bodyText = "In this challenge, You'll encounter situations where you can earn points or steer clear of potential losses. " +
+    const bodyText = "In this challenge, You'll encounter situations where you can earn points or steer clear of Potential  losses. " +
         "The key is to think strategically and make decisions that boost your score the most. " +
         "You have R300 as your start-up.";
 

@@ -15,6 +15,33 @@ namespace Loss_Aversion
     {
 
         /// <summary>
+        /// Bettedamountlb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Bettedamountlb;
+
+        /// <summary>
+        /// W_Lamountlb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label W_Lamountlb;
+
+        /// <summary>
+        /// potentialGainlb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label potentialGainlb;
+
+        /// <summary>
         /// btnAlosses control.
         /// </summary>
         /// <remarks>

@@ -172,6 +172,7 @@
     <Content Include="WebForm8.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.cs" />
     <Compile Include="WebForm9.aspx.cs">
       <DependentUpon>WebForm9.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

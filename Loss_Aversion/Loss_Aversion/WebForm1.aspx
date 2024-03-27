@@ -18,7 +18,7 @@
                     <h2 id="typed-title"></h2>
                     <p style="font-size: 15px"  id="typed-text"></p>
                     </div>
-                 <%--   <p class="fw-bold fs-2" >There are rumors circulating about a potential merger involving a company you've invested in.</p>--%>
+                 <%--   <p class="fw-bold fs-2" >There are rumors circulating about a Potential  merger involving a company you've invested in.</p>--%>
                 </div>
             </div>
                 <asp:Button ID="btnNext" runat="server" OnClick="btnNext_Click1" data-aos="fade-up" data-aos-delay="200"  CssClass="btn btn-success btn-Alosses" Width="212px" Text="Get Started" style="margin-top:25px" />

@@ -4,9 +4,10 @@ using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 
+
 namespace Loss_Aversion
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class WebForm2 : System.Web.UI.Page 
     {
 
 
@@ -16,9 +17,16 @@ namespace Loss_Aversion
             {
                 if (Session["Score"] == null)
                 {
-                    Session["Score"] = 300;
+                    Session["Score"] = 1000;
                 }
             }
+
+            double amount = Class1.Balance();
+            double roundedAmount = Math.Round(amount, 2);
+            Bettedamountlb.Text = roundedAmount.ToString(); 
+            W_Lamountlb.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
+            potentialGainlb.Text = Math.Round(Class1.potentialWin(0), 2).ToString();
+
         }
 
         protected void btnAlosses_Click(object sender, EventArgs e)
@@ -29,14 +37,17 @@ namespace Loss_Aversion
             UpdateDatabase(false, Session["SessionID"].ToString());
 
             Response.Redirect("WebForm3.aspx");
+
         }
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            ScoreManager.Gain();
-            Session["Score"] = ScoreManager.GetScore();
+            //ScoreManager.Gain();
+            //Session["Score"] = ScoreManager.GetScore();
 
-            UpdateDatabase(true, Session["SessionID"].ToString());
+            Class1.Bet(0);
+            //Class1.Balance();
+            //UpdateDatabase(true, Session["SessionID"].ToString());
 
             Response.Redirect("WebForm3.aspx");
         }
@@ -80,23 +91,21 @@ namespace Loss_Aversion
         {
             private static Random rnd = new Random();
 
-            public static int GetScore()
+            public static double GetScore()
             {
-                return Convert.ToInt32(HttpContext.Current.Session["Score"]);
+                return Convert.ToDouble(HttpContext.Current.Session["Score"]);
             }
 
             public static void AvoidLoss()
             {
-                int score = GetScore();
+                double score = GetScore();
                 HttpContext.Current.Session["Score"] = score;
+                //dp nothing 
             }
 
-            public static void Gain()
-            {
-                int score = GetScore();
-                score += rnd.Next(-300, 700);
-                HttpContext.Current.Session["Score"] = score;
-            }
+
+          
+
         }
     }
 }
