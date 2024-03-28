@@ -13,7 +13,7 @@
             <div class="card" style="width: 60%; box-shadow: 0 0 20px #00FF00" data-aos="fade-up" >
 
                 <div class="card-header">
-                    <p class="fw-bold fs-2" >You have invested in a stock, and there's news of a Potential  market downturn.</p>
+                    <asp:Label ID="lblQuestions" runat="server" CssClass="fw-bold fs-2" ></asp:Label>
                 </div>
                 <div class="card-body" style="display: flex;
     flex-direction: column;

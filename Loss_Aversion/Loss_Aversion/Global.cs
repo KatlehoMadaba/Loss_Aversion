@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using System.Web;
 using System.Web.UI.WebControls;
 
 public class Class1
 {
-    public static double[] PW = {70,60,50,30,10,5};
+    public static double[] PW = { 70, 60, 50, 30, 10, 5 };
     public string WorL = "";
-
+    public static int count =0;
 	public Class1(){}
 
     public static double expected_win_amount(double probability,double Balance)
@@ -20,6 +21,12 @@ public class Class1
         expected_amount = ((probPerc * A_W) - (P_l * A_1));//p
         return expected_amount;
     }
+    public static string[] Questions = { "You have invested in a stock, and there's news of a Potential  market downturn.",
+                                "You hold a portfolio of stocks, and the market experiences high volatility.",
+                                "One of the companies in your portfolio is about to release its earnings report, and there are mixed predictions.",
+                                "There are rumors circulating about a Potential  merger involving a company you've invested in.",
+                                "The global economic situation is uncertain, impacting stock markets worldwide.",
+                                "A promising tech company is going public, and you have the chance to invest in it."};
 
     public static string determine_win_loss(double P_W)
     {  

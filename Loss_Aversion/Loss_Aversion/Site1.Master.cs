@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,7 +11,11 @@ namespace Loss_Aversion
     public partial class Site1 : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {  
+            if(!IsPostBack)
+            {
+                Debug.Write("postBACK");
+            }
 
         }
     }

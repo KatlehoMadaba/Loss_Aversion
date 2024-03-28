@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 
@@ -9,17 +10,33 @@ namespace Loss_Aversion
 {
     public partial class WebForm2 : System.Web.UI.Page 
     {
+      
 
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+
             if (!IsPostBack)
             {
+
                 if (Session["Score"] == null)
                 {
                     Session["Score"] = 1000.00;
+
                 }
+                //count++;
+                lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+                Class1.count=1;
             }
+            else
+            {
+                lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+
+            }
+            
 
             double amount = Class1.Balance();
             double roundedAmount = Math.Round(amount, 2);
@@ -31,25 +48,32 @@ namespace Loss_Aversion
 
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
-            ScoreManager.AvoidLoss();
-            Session["Score"] = ScoreManager.GetScore();
+            
+            //ScoreManager.AvoidLoss();
+            //Session["Score"] = ScoreManager.GetScore();
 
-            UpdateDatabase(false, Session["SessionID"].ToString());
+            //UpdateDatabase(false, Session["SessionID"].ToString());
+            Class1.count++;
 
-            Response.Redirect("WebForm3.aspx");
+            if (Class1.count >= 6)
+            {
+                Response.Redirect("WebForm9.aspx");
+            }
+
 
         }
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            //ScoreManager.Gain();
-            //Session["Score"] = ScoreManager.GetScore();
+            
+            Class1.Bet(Class1.count);
+            Class1.count++;
 
-            Class1.Bet(0);
-            //Class1.Balance();
-            //UpdateDatabase(true, Session["SessionID"].ToString());
+            if (Class1.count >= 6)
+            {
+                Response.Redirect("WebForm9.aspx");
+            }
 
-            Response.Redirect("WebForm3.aspx");
         }
 
         private void UpdateDatabase(bool decision, string userId)
@@ -82,7 +106,7 @@ namespace Loss_Aversion
 
 
 
-                command.ExecuteNonQuery();
+               command.ExecuteNonQuery();
 
             }
         }

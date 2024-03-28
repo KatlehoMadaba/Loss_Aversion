@@ -34,8 +34,7 @@ namespace Loss_Aversion
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            //ScoreManager.Gain();
-            //Session["Score"] = ScoreManager.GetScore();
+
             Class1.Bet(4);
            
 

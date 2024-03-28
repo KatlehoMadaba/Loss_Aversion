@@ -32,7 +32,7 @@ namespace Loss_Aversion.assets
                 command.Parameters.AddWithValue("@Final_Score", HttpContext.Current.Session["Score"]);
                 command.Parameters.AddWithValue("@LossAV_ID", Session["SessionID"]);
 
-                command.ExecuteNonQuery();
+                //command.ExecuteNonQuery();
 
             }
         }
