@@ -7,7 +7,7 @@ using System.Web.UI;
 
 namespace Loss_Aversion
 {
-    public partial class WebForm2 : System.Web.UI.Page 
+    public partial class WebForm2 : System.Web.UI.Page
     {
 
 
@@ -18,12 +18,14 @@ namespace Loss_Aversion
                 if (Session["Score"] == null)
                 {
                     Session["Score"] = 1000.00;
+                    HttpContext.Current.Session["Win"] = 0;
+                    HttpContext.Current.Session["Loss"] = 0;
                 }
             }
 
             double amount = Class1.Balance();
             double roundedAmount = Math.Round(amount, 2);
-            Bettedamountlb.Text = roundedAmount.ToString(); 
+            Bettedamountlb.Text = roundedAmount.ToString();
             W_Lamountlb.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
             potentialGainlb.Text = Math.Round(Class1.potentialWin(0), 2).ToString();
 
@@ -34,7 +36,7 @@ namespace Loss_Aversion
             ScoreManager.AvoidLoss();
             Session["Score"] = ScoreManager.GetScore();
 
-            UpdateDatabase(false, Session["SessionID"].ToString());
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), 1);
 
             Response.Redirect("WebForm3.aspx");
 
@@ -47,45 +49,12 @@ namespace Loss_Aversion
 
             Class1.Bet(0);
             //Class1.Balance();
-            //UpdateDatabase(true, Session["SessionID"].ToString());
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), 1);
 
             Response.Redirect("WebForm3.aspx");
         }
 
-        private void UpdateDatabase(bool decision, string userId)
-        {
-            string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                connection.Open();
-
-
-                
-
-
-
-
-                string query = "UPDATE TBL_Loss_AV " +
-                               "SET Decision1 = @Decision1, Outcome1 = @Outcome1" +
-                               " WHERE LossAV_ID = @LossAV_ID";
-                
-
-
-                SqlCommand command = new SqlCommand(query, connection);
-
-
-                command.Parameters.AddWithValue("@Decision1", decision.ToString());
-                command.Parameters.AddWithValue("@Outcome1", Session["Score"].ToString());
-                command.Parameters.AddWithValue("@LossAV_ID", userId);
-
-
-
-
-                command.ExecuteNonQuery();
-
-            }
-        }
 
         public static class ScoreManager
         {
@@ -101,5 +70,6 @@ namespace Loss_Aversion
                 //dp nothing 
             }
         }
+
     }
 }

@@ -27,7 +27,7 @@ namespace Loss_Aversion
             ScoreManager.AvoidLoss();
             Session["Score"] = ScoreManager.GetScore();
 
-            UpdateDatabase(false, Session["SessionID"].ToString());
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), 6);
 
             Response.Redirect("WebForm9.aspx");
         }
@@ -37,7 +37,7 @@ namespace Loss_Aversion
             //ScoreManager.Gain();
             //Session["Score"] = ScoreManager.GetScore();
             Class1.Bet(5);
-           
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), 6);
 
             Response.Redirect("WebForm9.aspx");
         }
