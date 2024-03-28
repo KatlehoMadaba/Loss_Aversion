@@ -17,7 +17,7 @@ namespace Loss_Aversion
             {
                 if (Session["Score"] == null)
                 {
-                    Session["Score"] = 1000;
+                    Session["Score"] = 1000.00;
                 }
             }
 
@@ -89,8 +89,6 @@ namespace Loss_Aversion
 
         public static class ScoreManager
         {
-            private static Random rnd = new Random();
-
             public static double GetScore()
             {
                 return Convert.ToDouble(HttpContext.Current.Session["Score"]);
@@ -102,10 +100,6 @@ namespace Loss_Aversion
                 HttpContext.Current.Session["Score"] = score;
                 //dp nothing 
             }
-
-
-          
-
         }
     }
 }

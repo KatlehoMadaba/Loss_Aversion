@@ -13,7 +13,9 @@ namespace Loss_Aversion.assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblResults.Text = "R" + Session["Score"].ToString();
+            double finalScore =  Convert.ToDouble(HttpContext.Current.Session["Score"]);
+
+            lblResults.Text = "R" + Math.Round(finalScore, 2).ToString();
 
             string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
@@ -23,12 +25,12 @@ namespace Loss_Aversion.assets
 
                 string query = "UPDATE TBL_Loss_AV " +
                                "SET Final_Score = @Final_Score " +
-                               "WHERE LossAV_ID = @UserID";
+                               "WHERE LossAV_ID = @LossAV_ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
-                command.Parameters.AddWithValue("@Final_Score", Session["Score"]);
-                command.Parameters.AddWithValue("@UserID", Session["SessionID"]);
+                command.Parameters.AddWithValue("@Final_Score", HttpContext.Current.Session["Score"]);
+                command.Parameters.AddWithValue("@LossAV_ID", Session["SessionID"]);
 
                 command.ExecuteNonQuery();
 

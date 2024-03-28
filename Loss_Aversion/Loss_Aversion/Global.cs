@@ -5,16 +5,14 @@ using System.Web.UI.WebControls;
 
 public class Class1
 {
-    public static double[] PW = {70,60,50,30,5};
+    public static double[] PW = {70,60,50,30,10,5};
     public string WorL = "";
-	public Class1()
-	{ 
-        
-	}
+
+	public Class1(){}
 
     public static double expected_win_amount(double probability,double Balance)
     {
-        double probPerc = (probability / 100);//Converting probability into percentage 
+        double probPerc = (probability / 100);//Converting probability into decimal 
         double expected_amount = 0;
         double P_l = 1 - probPerc;// CAL probability of losing (sample space of probability )
         double A_W=Balance+(Balance/ probPerc)-Balance;//CAL amount to win
@@ -22,6 +20,7 @@ public class Class1
         expected_amount = ((probPerc * A_W) - (P_l * A_1));//p
         return expected_amount;
     }
+
     public static string determine_win_loss(double P_W)
     {  
         P_W = P_W / 100;
@@ -51,10 +50,7 @@ public class Class1
     }
     public static double Bet(int Index_Prob)
     {
-        //double Balance = Convert.ToDouble(HttpContext.Current.Session["Score"])
-        ////score += rnd.Next(-300, 700);
-        ///*HttpContext.Current.Session["Score"] = Balance*/
-        //;
+
         
         //add iƒ they won 
         if (Class1.determine_win_loss(Class1.PW[Index_Prob]) == "win" && Balance() != 0)

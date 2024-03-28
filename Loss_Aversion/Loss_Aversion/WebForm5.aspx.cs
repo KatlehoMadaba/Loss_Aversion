@@ -68,26 +68,16 @@ namespace Loss_Aversion
 
         public static class ScoreManager
         {
-            private static Random rnd = new Random();
-            private static int score = 300;
-
-
-            public static int GetScore()
+            public static double GetScore()
             {
-                return score;
+                return Convert.ToDouble(HttpContext.Current.Session["Score"]);
             }
 
             public static void AvoidLoss()
             {
-
-            }
-
-            public static void Gain()
-            {
-                // Randomly determine whether to gain or lose points
-
-                score += rnd.Next(-300, 700);
-
+                double score = GetScore();
+                HttpContext.Current.Session["Score"] = score;
+                //dp nothing 
             }
         }
 
