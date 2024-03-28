@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -14,7 +16,7 @@ public class Class1
     {
         double probPerc = (probability / 100);//Converting probability into decimal 
         double expected_amount = 0;
-        double P_l = 1 - probPerc;// CAL probability of losing (sample space of probability )
+        double P_l = 1 - probPerc;// CALc probability of losing (sample space of probability )
         double A_W=Balance+(Balance/ probPerc)-Balance;//CAL amount to win
         double A_1 = Balance;//Amount lost 
         expected_amount = ((probPerc * A_W) - (P_l * A_1));//p
@@ -67,5 +69,39 @@ public class Class1
         }
         
     }
+    public static void UpdateDatabase(bool decision, string userId, int questIndex)
+    {
+        string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            connection.Open();
+
+            //string query = "UPDATE TBL_Loss_AV " +
+            //               "SET Decision1 = @Decision1, Outcome1 = @Outcome1" +
+            //               " WHERE LossAV_ID = @LossAV_ID";
+
+
+            string query = $"UPDATE TBL_Loss_AV " +
+                       $"SET Decision{questIndex} = @Decision{questIndex}, Outcome{questIndex} = @Outcome{questIndex}, " +
+                       $"Win{questIndex} = @Win{questIndex}, Loss{questIndex} = @Loss{questIndex} " +
+                       $"WHERE LossAV_ID = @LossAV_ID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+
+            command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
+            command.Parameters.AddWithValue($"Outcome{questIndex}", HttpContext.Current.Session["Score"]);
+            command.Parameters.AddWithValue("@LossAV_ID", userId);
+            command.Parameters.AddWithValue($"@Win{questIndex}", HttpContext.Current.Session["Win"]);
+            command.Parameters.AddWithValue($"@Loss{questIndex}", HttpContext.Current.Session["Loss"]);
+
+            command.ExecuteNonQuery();
+
+
+
+        }
+    }
 }
+
+
