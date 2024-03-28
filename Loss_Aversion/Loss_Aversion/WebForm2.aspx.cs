@@ -10,22 +10,14 @@ namespace Loss_Aversion
 {
     public partial class WebForm2 : System.Web.UI.Page 
     {
-      
-
-        
-
+     
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-
             if (!IsPostBack)
             {
-
                 if (Session["Score"] == null)
                 {
                     Session["Score"] = 1000.00;
-
                 }
                 //count++;
                 lblQuestions.Text = Class1.Questions[Class1.count].ToString();
@@ -34,10 +26,8 @@ namespace Loss_Aversion
             else
             {
                 lblQuestions.Text = Class1.Questions[Class1.count].ToString();
-
             }
             
-
             double amount = Class1.Balance();
             double roundedAmount = Math.Round(amount, 2);
             Bettedamountlb.Text = roundedAmount.ToString(); 
@@ -49,10 +39,9 @@ namespace Loss_Aversion
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
             
-            //ScoreManager.AvoidLoss();
-            //Session["Score"] = ScoreManager.GetScore();
 
-            //UpdateDatabase(false, Session["SessionID"].ToString());
+
+            UpdateDatabase(false, Session["SessionID"].ToString());
             Class1.count++;
 
             if (Class1.count >= 6)
@@ -67,6 +56,8 @@ namespace Loss_Aversion
         {
             
             Class1.Bet(Class1.count);
+            UpdateDatabase(true, Session["SessionID"].ToString());
+
             Class1.count++;
 
             if (Class1.count >= 6)
@@ -100,7 +91,7 @@ namespace Loss_Aversion
 
 
                 command.Parameters.AddWithValue("@Decision1", decision.ToString());
-                command.Parameters.AddWithValue("@Outcome1", Session["Score"].ToString());
+                command.Parameters.AddWithValue("@Outcome1", Session["Score"]);
                 command.Parameters.AddWithValue("@LossAV_ID", userId);
 
 
