@@ -27,7 +27,7 @@ namespace Loss_Aversion
             ScoreManager.AvoidLoss();
             Session["Score"] = ScoreManager.GetScore();
 
-            UpdateDatabase(false, Session["SessionID"].ToString());
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(),2);
 
             Response.Redirect("WebForm4.aspx");
         }
@@ -38,33 +38,33 @@ namespace Loss_Aversion
             //Session["Score"] = ScoreManager.GetScore();
             
             Class1.Bet(1);
-           
-            UpdateDatabase(true, Session["SessionID"].ToString());
+
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), 2);
 
             Response.Redirect("WebForm4.aspx");
         }
 
-        private void UpdateDatabase(bool decision, string userId)
-        {
-            string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+        //private void UpdateDatabase(bool decision, string userId)
+        //{
+        //    string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                connection.Open();
+        //    using (SqlConnection connection = new SqlConnection(connString))
+        //    {
+        //        connection.Open();
 
-                string query = "UPDATE TBL_Loss_AV " +
-                               "SET Decision2 = @Decision2, Outcome2 = @Outcome2 " +
-                               "WHERE LossAV_ID = @LossAV_ID";
+        //        string query = "UPDATE TBL_Loss_AV " +
+        //                       "SET Decision2 = @Decision2, Outcome2 = @Outcome2 " +
+        //                       "WHERE LossAV_ID = @LossAV_ID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+        //        SqlCommand command = new SqlCommand(query, connection);
 
-                command.Parameters.AddWithValue("@Decision2", decision.ToString());
-                command.Parameters.AddWithValue("@Outcome2", Session["Score"]);
-                command.Parameters.AddWithValue("@LossAV_ID", userId);
+        //        command.Parameters.AddWithValue("@Decision2", decision.ToString());
+        //        command.Parameters.AddWithValue("@Outcome2", Session["Score"]);
+        //        command.Parameters.AddWithValue("@LossAV_ID", userId);
 
-                command.ExecuteNonQuery();
-            }
-        }
+        //        command.ExecuteNonQuery();
+        //    }
+        //}
 
 
         public static class ScoreManager
