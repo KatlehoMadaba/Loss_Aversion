@@ -35,9 +35,10 @@ public class Class1
         P_W = P_W / 100;
         Random random = new Random();
         double RN = random.NextDouble();
-        string Results = (RN< P_W) ? "win" : "Loss";
+        string Results = (RN< P_W) ? "Win" : "Loss";
         return Results;
     }
+
     public static double Balance()
     {
         double Balance = Convert.ToDouble(HttpContext.Current.Session["Score"]);
@@ -52,6 +53,7 @@ public class Class1
 
         return AmountoBet;
     }
+
     public static double potentialWin(int Index_Prob)
     {
        double pWin= Convert.ToDouble(Class1.expected_win_amount(Class1.PW[Index_Prob], AmountoBet()));
@@ -79,34 +81,34 @@ public class Class1
     public static void UpdateDatabase(bool decision, string userId, int questIndex)
     {
         string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+        int index = questIndex;
 
-        using (SqlConnection connection = new SqlConnection(connString))
+        if (index <= 6)
         {
-            connection.Open();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                connection.Open();
 
-            //string query = "UPDATE TBL_Loss_AV " +
-            //               "SET Decision1 = @Decision1, Outcome1 = @Outcome1" +
-            //               " WHERE LossAV_ID = @LossAV_ID";
+                //string query = "UPDATE TBL_Loss_AV " +
+                //               "SET Decision1 = @Decision1, Outcome1 = @Outcome1" +
+                //               " WHERE LossAV_ID = @LossAV_ID";
 
+                string query = $"UPDATE TBL_Loss_AV " +
+                           $"SET Decision{questIndex} = @Decision{questIndex}, Outcome{questIndex} = @Outcome{questIndex}, " +
+                           $"Win{questIndex} = @Win{questIndex}, Loss{questIndex} = @Loss{questIndex} " +
+                           $"WHERE LossAV_ID = @LossAV_ID";
 
-            string query = $"UPDATE TBL_Loss_AV " +
-                       $"SET Decision{questIndex} = @Decision{questIndex}, Outcome{questIndex} = @Outcome{questIndex}, " +
-                       $"Win{questIndex} = @Win{questIndex}, Loss{questIndex} = @Loss{questIndex} " +
-                       $"WHERE LossAV_ID = @LossAV_ID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-
-            command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
-            command.Parameters.AddWithValue($"Outcome{questIndex}", HttpContext.Current.Session["Score"]);
-            command.Parameters.AddWithValue("@LossAV_ID", userId);
-            command.Parameters.AddWithValue($"@Win{questIndex}", HttpContext.Current.Session["Win"]);
-            command.Parameters.AddWithValue($"@Loss{questIndex}", HttpContext.Current.Session["Loss"]);
-
-            command.ExecuteNonQuery();
+                SqlCommand command = new SqlCommand(query, connection);
 
 
+                command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
+                command.Parameters.AddWithValue($"Outcome{questIndex}", HttpContext.Current.Session["Score"]);
+                command.Parameters.AddWithValue("@LossAV_ID", userId);
+                command.Parameters.AddWithValue($"@Win{questIndex}", HttpContext.Current.Session["Win"]);
+                command.Parameters.AddWithValue($"@Loss{questIndex}", HttpContext.Current.Session["Loss"]);
 
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

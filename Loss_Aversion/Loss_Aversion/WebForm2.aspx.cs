@@ -18,6 +18,8 @@ namespace Loss_Aversion
                 if (Session["Score"] == null)
                 {
                     Session["Score"] = 1000.00;
+                    Session["Win"] = 0;
+                    Session["Loss"] = 0;
                 }
                 //count++;
                 lblQuestions.Text = Class1.Questions[Class1.count].ToString();
@@ -25,7 +27,14 @@ namespace Loss_Aversion
             }
             else
             {
-                lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+                if (Class1.count <= 5)
+                {
+                    lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+                }
+                else
+                {
+                    Response.Redirect("WebForm9.aspx");
+                }
             }
             
             double amount = Class1.Balance();
@@ -38,42 +47,59 @@ namespace Loss_Aversion
 
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
-            
+            HttpContext.Current.Session["Win"] = 0;
+            HttpContext.Current.Session["Loss"] = 0;
 
 
-            UpdateDatabase(false, Session["SessionID"].ToString());
-            Class1.count++;
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count + 1);
 
             if (Class1.count >= 6)
             {
-                Response.Redirect("WebForm9.aspx");
             }
 
-
+            Class1.count++;
         }
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            
-            Class1.Bet(Class1.count);
-            UpdateDatabase(true, Session["SessionID"].ToString());
-
-            Class1.count++;
-
-            if (Class1.count >= 6)
+            if (Class1.count<6)
             {
+               double value = Class1.Bet(Class1.count);
+                
+                if (Class1.determine_win_loss(Class1.PW[Class1.count])=="Win")
+                {
+                    HttpContext.Current.Session["Win"] = Class1.Bet(Class1.count);
+                    HttpContext.Current.Session["Loss"] = 0;
+                }
+                else if (Class1.determine_win_loss(Class1.PW[Class1.count]) == "Loss")
+                {
+                    HttpContext.Current.Session["Win"] = 0;
+                    HttpContext.Current.Session["Loss"] = Class1.Bet(Class1.count);
+                }
+                
+
+            }
+
+
+            if (Class1.count >= 7)
+            {
+                Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count + 1);
                 Response.Redirect("WebForm9.aspx");
             }
 
+
+            Class1.count++;
+
+
         }
 
-        private void UpdateDatabase(bool decision, string userId)
-        {
-            string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+        //private void UpdateDatabase(bool decision, string userId)
+        //{
+        //    string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                connection.Open();
+        //    using (SqlConnection connection = new SqlConnection(connString))
+        //    {
+        //        connection.Open();
 
 
                 
@@ -81,26 +107,26 @@ namespace Loss_Aversion
 
 
 
-                string query = "UPDATE TBL_Loss_AV " +
-                               "SET Decision1 = @Decision1, Outcome1 = @Outcome1" +
-                               " WHERE LossAV_ID = @LossAV_ID";
+        //        string query = "UPDATE TBL_Loss_AV " +
+        //                       "SET Decision1 = @Decision1, Outcome1 = @Outcome1" +
+        //                       " WHERE LossAV_ID = @LossAV_ID";
                 
 
 
-                SqlCommand command = new SqlCommand(query, connection);
+        //        SqlCommand command = new SqlCommand(query, connection);
 
 
-                command.Parameters.AddWithValue("@Decision1", decision.ToString());
-                command.Parameters.AddWithValue("@Outcome1", Session["Score"]);
-                command.Parameters.AddWithValue("@LossAV_ID", userId);
+        //        command.Parameters.AddWithValue("@Decision1", decision.ToString());
+        //        command.Parameters.AddWithValue("@Outcome1", Session["Score"]);
+        //        command.Parameters.AddWithValue("@LossAV_ID", userId);
 
 
 
 
-               command.ExecuteNonQuery();
+        //       command.ExecuteNonQuery();
 
-            }
-        }
+        //    }
+        //}
 
         public static class ScoreManager
         {
