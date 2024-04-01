@@ -11,35 +11,44 @@ namespace Loss_Aversion
 {
 
 
-    public partial class WebForm5
+    public partial class WebForm2
     {
 
         /// <summary>
-        /// Bettedamountlb control.
+        /// lblBettedAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Bettedamountlb;
+        protected global::System.Web.UI.WebControls.Label lblBettedAmount;
 
         /// <summary>
-        /// W_Lamountlb control.
+        /// lblPotentialLoss control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label W_Lamountlb;
+        protected global::System.Web.UI.WebControls.Label lblPotentialLoss;
 
         /// <summary>
-        /// potentialGainlb control.
+        /// lblPotentialGain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label potentialGainlb;
+        protected global::System.Web.UI.WebControls.Label lblPotentialGain;
+
+        /// <summary>
+        /// lblQuestions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblQuestions;
 
         /// <summary>
         /// btnAlosses control.

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+
 
 namespace Loss_Aversion.assets
 {
@@ -13,27 +9,34 @@ namespace Loss_Aversion.assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            double finalScore =  Convert.ToDouble(HttpContext.Current.Session["Score"]);
+            // Retrieve the final score from the Class1 static variable
+            double finalScore = Class1.Score;
 
+            // Display the final score on the page
             lblResults.Text = "R" + Math.Round(finalScore, 2).ToString();
 
+            // Retrieve the connection string from the web.config file
             string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
+            // Open a connection to the database using the connection string
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
 
+                // Define the SQL query to update the final score in the database
                 string query = "UPDATE TBL_Loss_AV " +
                                "SET Final_Score = @Final_Score " +
                                "WHERE LossAV_ID = @LossAV_ID";
 
+                // Create a SqlCommand object to execute the SQL query
                 SqlCommand command = new SqlCommand(query, connection);
 
-                command.Parameters.AddWithValue("@Final_Score", HttpContext.Current.Session["Score"]);
+                // Set parameters for the SQL command
+                command.Parameters.AddWithValue("@Final_Score", finalScore);
                 command.Parameters.AddWithValue("@LossAV_ID", Session["SessionID"]);
 
-                //command.ExecuteNonQuery();
-
+                // Execute the SQL command to update the final score in the database
+                command.ExecuteNonQuery();
             }
         }
     }
