@@ -4,3 +4,55 @@
 .btn-Gains {
     margin-top: 1rem;
 }
+
+/* Add custom CSS for responsiveness */
+#hero {
+    min-height: 100vh; /* Ensure hero section takes at least the height of the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.hero-container {
+    max-width: 100%;
+    padding: 0 15px;
+}
+
+.card {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 25px;
+    box-shadow: 0 0 20px #00FF00; /* Glowing effect */
+}
+
+.hero-logo img {
+    max-width: 100%;
+}
+
+/* Add custom CSS for responsiveness */
+#hero-container {
+    height: 100vh; /* Set the height of the container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-container > * {
+    max-width: 100%;
+}
+
+.card {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 25px;
+    box-shadow: 0 0 20px #00FF00; /* Glowing effect */
+}
+
+.hero-logo img {
+    max-width: 100%;
+}
