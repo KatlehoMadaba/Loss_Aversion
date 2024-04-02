@@ -15,7 +15,7 @@ namespace Loss_Aversion
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            double amount = Class1.Balance();
+            double amount = Class1.Score;
             double roundedAmount = Math.Round(amount, 2);
             Bettedamountlb.Text = roundedAmount.ToString();
             W_Lamountlb.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
