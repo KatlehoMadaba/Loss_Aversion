@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Loss_Aversion
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class Gamble2 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -11,14 +15,14 @@ namespace Loss_Aversion
             if (!IsPostBack)
             {
                 // Display the initial question
-                lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+                lblQuestions.Text = Class1.Questions[1].ToString();
                 // Reset the question counter
-                Class1.count = 1;
+                1 = 1;
             }
             else
             {
                 // If it's a postback, check if all questions have been answered
-                if (Class1.count > 5)
+                if (1 > 5)
                 {
                     // Redirect to the result page if all questions are answered
                     Response.Redirect("Result.aspx");
@@ -26,24 +30,15 @@ namespace Loss_Aversion
                 else
                 {
                     // Display the next question
-                    lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+                    lblQuestions.Text = Class1.Questions[1].ToString();
                 }
             }
 
             // Display the current balance, potential loss, and potential gain
-            if (!IsPostBack)
-            {
-                double Amount = Math.Round(Class1.Score, 2);
-                lblBettedAmount.Text = Amount.ToString();
-            }
-            else
-            {
-                double Amount = Math.Round(Class1.Score, 2);
-                lblBettedAmount.Text = Amount.ToString();
-            }
-
-            lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(),2).ToString();
-            lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count), 2).ToString();
+            double Amount = Math.Round(Class1.Balance(), 2);
+            lblBettedAmount.Text = Amount.ToString();
+            lblPotentialLoss.Text = Math.Round(Class1.potentialLoss(1), 2).ToString();
+            lblPotentialGain.Text = Math.Round(Class1.potentialWin(1), 2).ToString();
         }
 
         protected void btnAlosses_Click(object sender, EventArgs e)
@@ -53,47 +48,47 @@ namespace Loss_Aversion
             HttpContext.Current.Session["Loss"] = 0;
 
             // Check if all questions have been answered
-            if (Class1.count >= 7)
+            if (1 >= 7)
             {
                 // Update the database and redirect to the result page
-                Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count + 1);
+                Class1.UpdateDatabase(false, Session["SessionID"].ToString(), 1 + 1);
                 Response.Redirect("Result.aspx");
             }
 
             // Move to the next question
-            Class1.count++;
+            1++;
         }
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
             // Check if there are more questions to display
-            if (Class1.count < 6)
+            if (1 < 6)
             {
                 // Determine if the participant wins or loses based on probability
-                if (Class1.determine_win_loss(Class1.Probability[Class1.count]) == "win")
+                if (Class1.Win(Class1.Probability[1]) == true)
                 {
                     // Set session variable for Win and Loss
-                    HttpContext.Current.Session["Win"] = Class1.Bet(Class1.count);
+                    HttpContext.Current.Session["Win"] = Class1.Bet(1);
                     HttpContext.Current.Session["Loss"] = 0;
                 }
-                else if (Class1.determine_win_loss(Class1.Probability[Class1.count]) == "Loss")
+                else if (Class1.Win(Class1.Probability[1]) == false)
                 {
                     // Set session variable for Win and Loss
                     HttpContext.Current.Session["Win"] = 0;
-                    HttpContext.Current.Session["Loss"] = Class1.Bet(Class1.count);
+                    HttpContext.Current.Session["Loss"] = Class1.Bet(1);
                 }
             }
 
             // Check if all questions have been answered
-            if (Class1.count >= 7)
+            if (1 >= 7)
             {
                 // Update the database and redirect to the result page
-                Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count + 1);
+                Class1.UpdateDatabase(true, Session["SessionID"].ToString(), 1 + 1);
                 Response.Redirect("Result.aspx");
             }
 
             // Move to the next question
-            Class1.count++;
+            1++;
         }
     }
 }
