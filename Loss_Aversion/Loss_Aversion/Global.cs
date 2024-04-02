@@ -17,7 +17,7 @@ public class Class1
    
     public static int count = 0;
     
-    public static double Score = 0;
+    public static double Score = 1000;
 
 
 	public Class1(){}
