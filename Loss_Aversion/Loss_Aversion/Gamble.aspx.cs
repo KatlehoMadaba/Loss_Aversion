@@ -55,7 +55,7 @@ namespace Loss_Aversion
             Class1.Win = 0;
             Class1.Loss = 0;
 
-            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count + 1);
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count );
 
             // Check if all questions have been answered
             if (Class1.count >= 7)
@@ -144,7 +144,7 @@ namespace Loss_Aversion
             //}
             UpdateBalanceDisplay();
             // Move to the next question
-            Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count + 1);
+            Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count );
 
 
 
