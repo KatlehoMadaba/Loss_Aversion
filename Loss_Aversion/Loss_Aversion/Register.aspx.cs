@@ -13,8 +13,7 @@ namespace Loss_Aversion
             if (Class1.Score == 0)
             {
                 Class1.Score = 1000.00;
-                Session["Win"] = 0;
-                Session["Loss"] = 0;
+
             }
         }
 

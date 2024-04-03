@@ -16,6 +16,9 @@ public class Class1
 
    
     public static int count = 0;
+    public static double Win = 0;
+    public static double Loss = 0;
+
     
     //public static double Score = 0;
     public static double Score
@@ -94,10 +97,8 @@ public class Class1
     public static void UpdateDatabase(bool decision, string userId, int questIndex)
     {
         string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
-        int index = questIndex;
 
-        if (index <= 6)
-        {
+
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
@@ -113,12 +114,12 @@ public class Class1
                 command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
                 command.Parameters.AddWithValue($"Outcome{questIndex}", Score);
                 command.Parameters.AddWithValue("@LossAV_ID", userId);
-                command.Parameters.AddWithValue($"@Win{questIndex}", HttpContext.Current.Session["Win"]);
-                command.Parameters.AddWithValue($"@Loss{questIndex}", HttpContext.Current.Session["Loss"]);
+                command.Parameters.AddWithValue($"@Win{questIndex}", Win);
+                command.Parameters.AddWithValue($"@Loss{questIndex}", Loss);
 
                 command.ExecuteNonQuery();
-            }
         }
+        
     }
     //public static Boolean Win(double Probability)
     //{

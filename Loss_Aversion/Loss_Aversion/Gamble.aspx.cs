@@ -52,18 +52,22 @@ namespace Loss_Aversion
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
             // Reset session variables for Win and Loss
-            HttpContext.Current.Session["Win"] = 0;
-            HttpContext.Current.Session["Loss"] = 0;
+            Class1.Win = 0;
+            Class1.Loss = 0;
+
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count + 1);
 
             // Check if all questions have been answered
             if (Class1.count >= 7)
             {
                 // Update the database and redirect to the result page
-                Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count + 1);
                 Response.Redirect("Result.aspx");
             }
 
             // Move to the next question
+
+
+
             Class1.count++;
         }
 
@@ -109,13 +113,13 @@ namespace Loss_Aversion
                 resultAmount = Class1.Bet(Class1.count);
                 if (resultAmount >= 0) // Won
                 {
-                    HttpContext.Current.Session["Win"] = resultAmount;
-                    HttpContext.Current.Session["Loss"] = 0;
+                    Class1.Win = resultAmount;
+                    Class1.Loss = 0;
                 }
                 else // Lost
                 {
-                    HttpContext.Current.Session["Win"] = 0;
-                    HttpContext.Current.Session["Loss"] = -resultAmount; // Assuming resultAmount is negative for losses
+                    Class1.Win = 0;
+                    Class1.Loss = -resultAmount; // Assuming resultAmount is negative for losses
                 }
                 //if (resultAmount >= 0)
                 //{
@@ -140,6 +144,17 @@ namespace Loss_Aversion
             //}
             UpdateBalanceDisplay();
             // Move to the next question
+            Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count + 1);
+
+
+
+            // Check if all questions have been answered
+            if (Class1.count >= 7)
+            {
+                // Update the database and redirect to the result page
+                Response.Redirect("Result.aspx");
+            }
+
             Class1.count++;
         }
         private void UpdateBalanceDisplay()
