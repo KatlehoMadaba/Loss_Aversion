@@ -46,7 +46,7 @@ namespace Loss_Aversion
 
             lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(),2).ToString();
             lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count), 2).ToString();
-            UpdateBalanceDisplay();
+            //UpdateBalanceDisplay();
         }
 
         protected void btnAlosses_Click(object sender, EventArgs e)
