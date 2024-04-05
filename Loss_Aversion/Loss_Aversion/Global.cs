@@ -20,12 +20,13 @@ public class Class1
     public static double Loss = 0;
 
     
-    //public static double Score = 0;
-    public static double Score
-    {
-        get { return HttpContext.Current.Session["Score"] != null ? Convert.ToDouble(HttpContext.Current.Session["Score"]) : 0; }
-        set { HttpContext.Current.Session["Score"] = value; }
-    }
+    public static double Score = 0;
+   
+    // public static double Score
+    //{
+      //  get { return HttpContext.Current.Session["Score"] != null ? Convert.ToDouble(HttpContext.Current.Session["Score"]) : 0; }
+        //set { HttpContext.Current.Session["Score"] = value; }
+    //}
 
     public Class1(){}
 
@@ -70,21 +71,20 @@ public class Class1
         double potentialWinAmount = potentialWin(Index_Prob);
         double potentialLossAmount = amountToBet; // Potential loss is the amount to bet
 
-        // Check if potential win amount is greater than potential loss amount
-        if (potentialWinAmount > potentialLossAmount && Score >= 0)
-        {
-            // Determine win or loss
             if (determine_win_loss(Probability[Index_Prob]) == "win")
             {
                 // Add the win amount to the balance
+                Win = potentialWinAmount;
+                Loss = 0;
                 Score = Score + potentialWinAmount;
             }
             else
             {
                 // Subtract the loss amount from the balance
+                Win = 0;
+                Loss = potentialLossAmount;
                 Score = Score - potentialLossAmount;
             }
-        }
 
 
         return Score;
@@ -98,7 +98,6 @@ public class Class1
     {
         string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
-
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
@@ -110,62 +109,17 @@ public class Class1
 
                 SqlCommand command = new SqlCommand(query, connection);
 
-
                 command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
-                command.Parameters.AddWithValue($"Outcome{questIndex}", Score);
+                command.Parameters.AddWithValue($"Outcome{questIndex}", Math.Round(Score));
                 command.Parameters.AddWithValue("@LossAV_ID", userId);
-                command.Parameters.AddWithValue($"@Win{questIndex}", Win);
-                command.Parameters.AddWithValue($"@Loss{questIndex}", Loss);
+                command.Parameters.AddWithValue($"@Win{questIndex}", Math.Round(Win));
+                command.Parameters.AddWithValue($"@Loss{questIndex}", Math.Round(Loss));
 
                 command.ExecuteNonQuery();
         }
         
     }
-    //public static Boolean Win(double Probability)
-    //{
-    //    Probability = Probability * 100;
-    //    Random rand = new Random();
-
-    //    return rand.Next(1,100)<=Probability;
-
-    //}
-
-    //public static double expected_win_amount(double ProbWin, double Balance)
-    //{
-    //    return (Balance / ProbWin); //CAL amount to win
-    //}
-
-    //public static double potentialLoss(int Index_Prob)
-    //{
-    //    double pWin = expected_win_amount(Probability[Index_Prob], Balance());
-    //    return pWin;
-    //}
-
-    //public static double potentialWin(int Index_Prob)
-    //{
-    //    double pWin= expected_win_amount(Probability[Index_Prob], Balance());
-    //    return pWin;
-    //}
-
-    //public static double Bet(int Index_Prob)
-    //{
-    //    //add iƒ they won 
-    //    if (Class1.Win(Class1.Probability[Index_Prob]) == true && Balance() >= 0)
-    //    {
-    //        Score = Balance() + Class1.expected_win_amount(Class1.Probability[Index_Prob], potentialLoss(Index_Prob));
-    //        return Score;
-
-    //    }
-    //    else if(Class1.Win(Class1.Probability[Index_Prob]) == false && Balance() != 0)
-    //    {   //subtract what they lost
-
-    //        Score = Balance() - potentialLoss(Index_Prob);
-    //        return Score;
-    //    }
-
-    //    return 0;
-
-    //}
+    
 
 
 
