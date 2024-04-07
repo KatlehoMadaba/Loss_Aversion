@@ -13,12 +13,14 @@ namespace Loss_Aversion
                 // Display the initial question
                 lblQuestions.Text = Class1.Questions[Class1.count].ToString();
                 // Reset the question counter
-                Class1.count = 1;
+                 Class1.count = 1;
+              //  Class1.count = 0; Cant make it 0, cz theres no Decion 0 , so minus one where i call the bet function
+                //make it zero then its 0, 1, 2,3,4,5
             }
             else
             {
                 // If it's a postback, check if all questions have been answered
-                if (Class1.count > 5)
+                if (Class1.count > 6) //was 5 make it 6
                 {
                     // Redirect to the result page if all questions are answered
                     Response.Redirect("Result.aspx");
@@ -26,7 +28,7 @@ namespace Loss_Aversion
                 else
                 {
                     // Display the next question
-                    lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+                    lblQuestions.Text = Class1.Questions[Class1.count -1].ToString(); //say count -1
                 }
               
             }
@@ -44,9 +46,9 @@ namespace Loss_Aversion
             }
 
             lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(),2).ToString();
-            lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count), 2).ToString();
+            lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count -1), 2).ToString(); //minus 1 to get 0 pos in database
             UpdateBalanceDisplay();
-        }
+        } 
 
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
@@ -60,7 +62,7 @@ namespace Loss_Aversion
 
 
             // Check if all questions have been answered
-            if (Class1.count >= 8)
+            if (Class1.count >= 7)  //make this 7 it was 8
             {
                 // Update the database and redirect to the result page
                 Response.Redirect("Result.aspx");
@@ -80,9 +82,10 @@ namespace Loss_Aversion
 
                 // Determine if the participant wins or loses based on probability
                 //string result = Class1.determine_win_loss(Class1.Probability[Class1.count]);
-                resultAmount = Class1.Bet(Class1.count);
+                resultAmount = Class1.Bet(Class1.count); 
  
-            UpdateBalanceDisplay();
+            UpdateBalanceDisplay(); ///THIS IS AN ISSUE , its the reason the balance is weird !!! this must be at a new page load or something
+            //Additially to that we need to show the Win and Loss that obtained in the bet function, the values displayed on the page are inaccurate
             // Move to the next question
             Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count);
 
@@ -90,7 +93,7 @@ namespace Loss_Aversion
 
 
             // Check if all questions have been answered
-            if (Class1.count >= 8)
+            if (Class1.count >= 7) //make this 7 it was 8
             {
                 // Update the database and redirect to the result page
                 Response.Redirect("Result.aspx");

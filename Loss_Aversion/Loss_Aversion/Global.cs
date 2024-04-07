@@ -15,7 +15,8 @@ public class Class1
                                             "A promising tech company is going public, and you have the chance to invest in it."};
 
    
-    public static int count = 0;
+    //public static int count = 0;
+    public static int count = 1;
     public static double Win = 0;
     public static double Loss = 0;
 
@@ -68,11 +69,11 @@ public class Class1
     public static double Bet(int Index_Prob)
     {
         double amountToBet = AmountoBet();
-        double potentialWinAmount = potentialWin(Index_Prob);
+        double potentialWinAmount = potentialWin(Index_Prob-1); //minus one at index
         double potentialLossAmount = amountToBet; // Potential loss is the amount to bet
 
-            if (determine_win_loss(Probability[Index_Prob]) == "win")
-            {
+            if (determine_win_loss(Probability[Index_Prob -1]) == "win") //minus one at index
+        {
                 // Add the win amount to the balance
                 Win = potentialWinAmount;
                 Loss = 0;
