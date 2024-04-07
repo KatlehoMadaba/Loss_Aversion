@@ -36,7 +36,7 @@ namespace Loss_Aversion
             HttpContext.Current.Session["Loss"] = 0;
 
 
-            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count + 1);
+            Class1.UpdateDatabase(false, Session["SessionID"].ToString(), 1);
 
             Class1.count++;
 
@@ -48,24 +48,18 @@ namespace Loss_Aversion
 
         protected void btnGains_Click(object sender, EventArgs e)
         {
+
+
+
             double value = Class1.Bet(Class1.count);
 
-            if (Class1.determine_win_loss(Class1.Probability[Class1.count]) == "Win")
-            {
-                HttpContext.Current.Session["Win"] = Class1.Bet(Class1.count);
-                HttpContext.Current.Session["Loss"] = 0;
-            }
-            else if (Class1.determine_win_loss(Class1.Probability[Class1.count]) == "Loss")
-            {
-                HttpContext.Current.Session["Win"] = 0;
-                HttpContext.Current.Session["Loss"] = Class1.Bet(Class1.count);
-            }
 
 
 
 
 
-            Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count + 1);
+
+            Class1.UpdateDatabase(true, Session["SessionID"].ToString(), 1);
 
             Class1.count++;
 

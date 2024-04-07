@@ -14,6 +14,8 @@ public class Class1
 
     public static double Score = 0;
     public static int count = 0;
+    public static double Win = 0;
+    public static double Loss = 0;
 
 	public Class1(){}
 
@@ -23,6 +25,8 @@ public class Class1
                                 "There are rumors circulating about a Potential  merger involving a company you've invested in.",
                                 "The global economic situation is uncertain, impacting stock markets worldwide.",
                                 "A promising tech company is going public, and you have the chance to invest in it."};
+
+
 
     public static double expected_win_amount(double probability, double Balance)
     {
@@ -81,38 +85,48 @@ public class Class1
             }
         }
 
+        if (Class1.determine_win_loss(Class1.Probability[Class1.count]) == "Win")
+        {
+            Class1.Win = Class1.Bet(Class1.count);
+            Class1.Loss = 0;
+        }
+        else if (Class1.determine_win_loss(Class1.Probability[Class1.count]) == "Loss")
+        {
+            Class1.Win = 0;
+            Class1.Loss = Class1.Bet(Class1.count);
+        }
+
+
         return Score;
     }
 
     public static void UpdateDatabase(bool decision, string userId, int questIndex)
     {
         string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
-        int index = questIndex;
 
-        if (index <= 6)
-        {
+     
             using (SqlConnection connection = new SqlConnection(connString))
             {
                 connection.Open();
 
 
                 string query = $"UPDATE TBL_Loss_AV " +
-                           $"SET Decision{questIndex} = @Decision{questIndex}, Outcome{questIndex} = @Outcome{questIndex}, " +
-                           $"Win{questIndex} = @Win{questIndex}, Loss{questIndex} = @Loss{questIndex} " +
+                           $"SET Decision{questIndex} = @Decision, Outcome{questIndex} = @Outcome, " +
+                           $"Win{questIndex} = @Win, Loss{questIndex} = @Loss " +
                            $"WHERE LossAV_ID = @LossAV_ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
 
-                command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
-                command.Parameters.AddWithValue($"Outcome{questIndex}", HttpContext.Current.Session["Score"]);
+                command.Parameters.AddWithValue($"@Decision", decision.ToString());
+                command.Parameters.AddWithValue($"Outcome", Score);
                 command.Parameters.AddWithValue("@LossAV_ID", userId);
-                command.Parameters.AddWithValue($"@Win{questIndex}", HttpContext.Current.Session["Win"]);
-                command.Parameters.AddWithValue($"@Loss{questIndex}", HttpContext.Current.Session["Loss"]);
+                command.Parameters.AddWithValue($"@Win", Math.Round(Win));
+                command.Parameters.AddWithValue($"@Loss", Math.Round(Loss));
 
                 command.ExecuteNonQuery();
             }
-        }
+        
     }
 }
 
