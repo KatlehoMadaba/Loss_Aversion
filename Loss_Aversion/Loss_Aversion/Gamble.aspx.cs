@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Web;
 
 namespace Loss_Aversion
@@ -13,11 +15,18 @@ namespace Loss_Aversion
             {
                 // Display the initial question
                 lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+
+                lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
+                lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count - 1), 2).ToString(); //minus 1 to get 0 pos in database
                 // Reset the question counter
-                 Class1.count = 1;
+                Class1.count = 1;
                 //  Class1.count = 0; Cant make it 0, cz theres no Decion 0 , so minus one where i call the bet function
                 //make it zero then its 0, 1, 2,3,4,5
-           
+
+
+                double Amount = Math.Round(Class1.Score, 2);
+                lblBettedAmount.Text = Amount.ToString();
+
             }
             else
             {
@@ -32,27 +41,62 @@ namespace Loss_Aversion
                     // Display the next question
                     lblQuestions.Text = Class1.Questions[Class1.count -1].ToString(); //say count -1
                 }
-                lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 2).ToString();
-                lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 2).ToString();
-            }
+                lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
+                lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count - 1), 2).ToString(); //minus 1 to get 0 pos in database
 
-            // Display the current balance, potential loss, and potential gain
-            if (!IsPostBack)
-            {
+
+
                 double Amount = Math.Round(Class1.Score, 2);
-                lblBettedAmount.Text = Amount.ToString();
-            }
-            else
-            {
-                double Amount = Math.Round(Class1.Score, 2);
-                lblBettedAmount.Text = Amount.ToString();
+                lblBettedAmount.Text = DisplayBalance(Class1.count-1);
             }
 
             //lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
             //lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count - 1), 2).ToString(); //minus 1 to get 0 pos in database
            //minus 1 to get 0 pos in database
-            UpdateBalanceDisplay();
-        } 
+            //UpdateBalanceDisplay();
+        }
+
+
+        protected string DisplayBalance(int i)
+        {
+            string balance = "Nun";
+            // Connection string to connect to your SQL Server database
+            string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
+            // Concatenate the value of 'i' with the string for column name
+            string columnName = "Outcome" + i;
+
+            string query = $"SELECT {columnName} FROM TBL_Loss_AV WHERE LossAV_ID = @ID";
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        // Add parameter for LossAV_ID
+                        command.Parameters.AddWithValue("@ID", Session["SessionID"]);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Access the column value using the correct column name
+                                balance = reader[columnName].ToString();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
+            }
+            return balance;
+        }
+
 
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
