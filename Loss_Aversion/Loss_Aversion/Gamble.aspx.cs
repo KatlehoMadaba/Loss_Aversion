@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Web;
 
 namespace Loss_Aversion
@@ -15,9 +16,12 @@ namespace Loss_Aversion
             {
                 // Display the initial question
                 lblQuestions.Text = Class1.Questions[Class1.count].ToString();
+                
+
 
                 lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
                 lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count - 1), 2).ToString(); //minus 1 to get 0 pos in database
+
                 // Reset the question counter
                 Class1.count = 1;
                 //  Class1.count = 0; Cant make it 0, cz theres no Decion 0 , so minus one where i call the bet function
@@ -30,6 +34,7 @@ namespace Loss_Aversion
             }
             else
             {
+
                 // If it's a postback, check if all questions have been answered
                 if (Class1.count > 6) //was 5 make it 6
                 {
@@ -48,11 +53,15 @@ namespace Loss_Aversion
 
                 double Amount = Math.Round(Class1.Score, 2);
                 lblBettedAmount.Text = DisplayBalance(Class1.count-1);
+
+
+
+
             }
 
             //lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
             //lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count - 1), 2).ToString(); //minus 1 to get 0 pos in database
-           //minus 1 to get 0 pos in database
+            //minus 1 to get 0 pos in database
             //UpdateBalanceDisplay();
         }
 
@@ -106,6 +115,11 @@ namespace Loss_Aversion
 
             Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count);
 
+            if (Class1.count == 1)
+            {
+                lblBettedAmount.Text = DisplayBalance(1);
+            }
+
             Class1.count++;
 
 
@@ -139,6 +153,12 @@ namespace Loss_Aversion
             // Move to the next question
             Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count);
 
+            if (Class1.count == 1)
+            {
+                lblBettedAmount.Text = DisplayBalance(1);
+               // lblBettedAmount.Text = resultAmount.ToString();
+            }
+
             Class1.count++;
 
 
@@ -148,6 +168,8 @@ namespace Loss_Aversion
                 // Update the database and redirect to the result page
                 Response.Redirect("Result.aspx");
             }
+
+
 
         }
 

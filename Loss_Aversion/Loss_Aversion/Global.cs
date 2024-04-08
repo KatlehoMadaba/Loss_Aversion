@@ -5,7 +5,7 @@ using System.Web;
 
 public class Class1
 {
-    public static double[] Probability = { 95, 90, 85, 80, 50, 10 };
+    public static double[] Probability = { 100, 99, 98, 97, 96, 95 };
     
     public static string[] Questions = {    "You have invested in a stock, and there's news of a Potential  market downturn.",
                                             "You hold a portfolio of stocks, and the market experiences high volatility.",
@@ -45,8 +45,6 @@ public class Class1
         double P_l = 1 - probPerc;// CAL probability of losing (sample space of probability )
         double A_W = Balance + (Balance / probPerc) - Balance;//CAL amount to win
         double A_1 = Balance;//Amount lost 
-        //expected_amount = ((probPerc * A_W) - (P_l * A_1));//p
-        //expected_amount = A_W-Balance;//p
         return A_W;
     }
 
@@ -70,7 +68,7 @@ public class Class1
 
     public static double potentialWin(int Index_Prob)
     {
-        double pWin = Convert.ToDouble(Class1.expected_win_amount(Probability[Index_Prob], AmountoBet()));
+        double pWin = Convert.ToDouble(expected_win_amount(Probability[Index_Prob], AmountoBet()));
         return pWin;
 
     }
