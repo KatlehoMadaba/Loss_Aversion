@@ -11,7 +11,7 @@ namespace Loss_Aversion
 {
 
 
-    public partial class WebForm2
+    public partial class Question6
     {
 
         /// <summary>

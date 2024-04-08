@@ -159,15 +159,62 @@
     <Content Include="assets\vendor\php-email-form\validate.js" />
     <Content Include="assets\vendor\swiper\swiper-bundle.min.css" />
     <Content Include="assets\vendor\swiper\swiper-bundle.min.js" />
+    <Content Include="Question1.aspx" />
+    <Content Include="Question2.aspx" />
+    <Content Include="Question3.aspx" />
+    <Content Include="Question4.aspx" />
+    <Content Include="Question5.aspx" />
+    <Content Include="Question6.aspx" />
     <Content Include="Result.aspx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="Web.config" />
     <Content Include="LandingPage.aspx" />
-    <Content Include="Gamble.aspx" />
     <Content Include="Register.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.cs" />
+    <Compile Include="Question1.aspx.cs">
+      <DependentUpon>Question1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question1.aspx.designer.cs">
+      <DependentUpon>Question1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Question2.aspx.cs">
+      <DependentUpon>Question2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question2.aspx.designer.cs">
+      <DependentUpon>Question2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Question3.aspx.cs">
+      <DependentUpon>Question3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question3.aspx.designer.cs">
+      <DependentUpon>Question3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Question4.aspx.cs">
+      <DependentUpon>Question4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question4.aspx.designer.cs">
+      <DependentUpon>Question4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Question5.aspx.cs">
+      <DependentUpon>Question5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question5.aspx.designer.cs">
+      <DependentUpon>Question5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Question6.aspx.cs">
+      <DependentUpon>Question6.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question6.aspx.designer.cs">
+      <DependentUpon>Question6.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Result.aspx.cs">
       <DependentUpon>Result.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -189,13 +236,6 @@
     </Compile>
     <Compile Include="LandingPage.aspx.designer.cs">
       <DependentUpon>LandingPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gamble.aspx.cs">
-      <DependentUpon>Gamble.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gamble.aspx.designer.cs">
-      <DependentUpon>Gamble.aspx</DependentUpon>
     </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>

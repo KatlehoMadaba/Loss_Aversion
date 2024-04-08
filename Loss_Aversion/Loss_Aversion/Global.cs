@@ -5,7 +5,6 @@ using System.Web;
 
 public class Class1
 {
-    public static double[] Probability = { 100, 99, 98, 97, 96, 95 };
     
     public static string[] Questions = {    "You have invested in a stock, and there's news of a Potential  market downturn.",
                                             "You hold a portfolio of stocks, and the market experiences high volatility.",
@@ -15,20 +14,10 @@ public class Class1
                                             "A promising tech company is going public, and you have the chance to invest in it."};
 
    
-    //public static int count = 0;
-    public static int count = 1;
     public static double Win = 0;
     public static double Loss = 0;
 
-    
-    public static double Score = 0;
-    //public static double amountToBet ;
-    //public static double potentialWinAmount ;
-    // public static double Score
-    //{
-    //  get { return HttpContext.Current.Session["Score"] != null ? Convert.ToDouble(HttpContext.Current.Session["Score"]) : 0; }
-    //set { HttpContext.Current.Session["Score"] = value; }
-    //}
+    public static double Score = Convert.ToDouble(HttpContext.Current.Session["Score"]);
 
     public Class1(){}
     public static double getWin(double Win)
@@ -66,22 +55,22 @@ public class Class1
         return AmountoBet;
     }
 
-    public static double potentialWin(int Index_Prob)
+    public static double potentialWin(int Probability)
     {
-        double pWin = Convert.ToDouble(expected_win_amount(Probability[Index_Prob], AmountoBet()));
+        double pWin = Convert.ToDouble(expected_win_amount(Probability, AmountoBet()));
         return pWin;
 
     }
 
-    public static double Bet(int Index_Prob)
+    public static double Bet(int Probability)
     {
          double amountToBet = AmountoBet();
          HttpContext.Current.Session["potentialLoss"]= amountToBet;
-         double potentialWinAmount = potentialWin(Index_Prob-1); //minus one at index
+         double potentialWinAmount = potentialWin(Probability); //minus one at index
          HttpContext.Current.Session["potentialWin"] = potentialWinAmount;
         double potentialLossAmount = amountToBet; // Potential loss is the amount to bet
 
-            if (determine_win_loss(Probability[Index_Prob -1]) == "win") //minus one at index
+            if (determine_win_loss(Probability) == "win") //minus one at index
         {
                 // Add the win amount to the balance
                 Win = potentialWinAmount;
@@ -121,7 +110,7 @@ public class Class1
                 SqlCommand command = new SqlCommand(query, connection);
 
                 command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
-                command.Parameters.AddWithValue($"Outcome{questIndex}", Math.Round(Score));
+                command.Parameters.AddWithValue($"Outcome{questIndex}", Math.Round(Score,2));
                 command.Parameters.AddWithValue("@LossAV_ID", userId);
                 command.Parameters.AddWithValue($"@Win{questIndex}", Math.Round(Win));
                 command.Parameters.AddWithValue($"@Loss{questIndex}", Math.Round(Loss));

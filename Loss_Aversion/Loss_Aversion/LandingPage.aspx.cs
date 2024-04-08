@@ -17,6 +17,7 @@ namespace Loss_Aversion
         {
             // Generate a unique session ID using Guid.NewGuid() and store it in the session state
             Session["SessionID"] = Guid.NewGuid().ToString();
+            Session["Score"] = 1000;
             // Call the method to insert data into the database
             InsertIntoDatabase();
             // Redirect the user to the "Register.aspx" page

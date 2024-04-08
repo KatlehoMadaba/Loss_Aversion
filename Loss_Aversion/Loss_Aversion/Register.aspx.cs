@@ -10,10 +10,9 @@ namespace Loss_Aversion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Class1.Score == 0)
+            if (Session["Score"] == null)
             {
-                Class1.Score = 1000.00;
-
+                Session["Score"] = 1000.00;
             }
         }
 
@@ -23,7 +22,7 @@ namespace Loss_Aversion
         {
             InsertIntoDatabase();
             Session["Username"] = txtname.Text; //session
-            Response.Redirect("Gamble.aspx");
+            Response.Redirect("Question1.aspx");
             
         }
 
