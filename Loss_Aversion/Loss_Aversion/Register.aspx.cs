@@ -24,6 +24,7 @@ namespace Loss_Aversion
             InsertIntoDatabase();
             Session["Username"] = txtname.Text; //session
             Response.Redirect("Gamble.aspx");
+            
         }
 
         private void InsertIntoDatabase()

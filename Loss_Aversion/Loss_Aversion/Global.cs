@@ -22,15 +22,23 @@ public class Class1
 
     
     public static double Score = 0;
-   
+    //public static double amountToBet ;
+    //public static double potentialWinAmount ;
     // public static double Score
     //{
-      //  get { return HttpContext.Current.Session["Score"] != null ? Convert.ToDouble(HttpContext.Current.Session["Score"]) : 0; }
-        //set { HttpContext.Current.Session["Score"] = value; }
+    //  get { return HttpContext.Current.Session["Score"] != null ? Convert.ToDouble(HttpContext.Current.Session["Score"]) : 0; }
+    //set { HttpContext.Current.Session["Score"] = value; }
     //}
 
     public Class1(){}
-
+    public static double getWin(double Win)
+    {
+        return Win;
+    }
+    public static double getLoss( double Loss)
+    {
+        return Loss;
+    }
     public static double expected_win_amount(double probability, double Balance)
     {
         double probPerc = (probability / 100);//Converting probability into decimal 
@@ -41,6 +49,7 @@ public class Class1
         //expected_amount = A_W-Balance;//p
         return A_W;
     }
+
     public static string determine_win_loss(double P_W)
     {
         P_W = P_W / 100;
@@ -68,8 +77,10 @@ public class Class1
 
     public static double Bet(int Index_Prob)
     {
-        double amountToBet = AmountoBet();
-        double potentialWinAmount = potentialWin(Index_Prob-1); //minus one at index
+         double amountToBet = AmountoBet();
+         HttpContext.Current.Session["potentialLoss"]= amountToBet;
+         double potentialWinAmount = potentialWin(Index_Prob-1); //minus one at index
+         HttpContext.Current.Session["potentialWin"] = potentialWinAmount;
         double potentialLossAmount = amountToBet; // Potential loss is the amount to bet
 
             if (determine_win_loss(Probability[Index_Prob -1]) == "win") //minus one at index
@@ -78,6 +89,7 @@ public class Class1
                 Win = potentialWinAmount;
                 Loss = 0;
                 Score = Score + potentialWinAmount;
+
             }
             else
             {
@@ -120,7 +132,7 @@ public class Class1
         }
         
     }
-    
+   
 
 
 

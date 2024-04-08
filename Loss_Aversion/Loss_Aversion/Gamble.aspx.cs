@@ -7,6 +7,7 @@ namespace Loss_Aversion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+       
             // Check if the page is loaded for the first time
             if (!IsPostBack)
             {
@@ -14,8 +15,9 @@ namespace Loss_Aversion
                 lblQuestions.Text = Class1.Questions[Class1.count].ToString();
                 // Reset the question counter
                  Class1.count = 1;
-              //  Class1.count = 0; Cant make it 0, cz theres no Decion 0 , so minus one where i call the bet function
+                //  Class1.count = 0; Cant make it 0, cz theres no Decion 0 , so minus one where i call the bet function
                 //make it zero then its 0, 1, 2,3,4,5
+           
             }
             else
             {
@@ -30,7 +32,8 @@ namespace Loss_Aversion
                     // Display the next question
                     lblQuestions.Text = Class1.Questions[Class1.count -1].ToString(); //say count -1
                 }
-              
+                lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 2).ToString();
+                lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 2).ToString();
             }
 
             // Display the current balance, potential loss, and potential gain
@@ -45,8 +48,9 @@ namespace Loss_Aversion
                 lblBettedAmount.Text = Amount.ToString();
             }
 
-            lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(),2).ToString();
-            lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count -1), 2).ToString(); //minus 1 to get 0 pos in database
+            //lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
+            //lblPotentialGain.Text = Math.Round(Class1.potentialWin(Class1.count - 1), 2).ToString(); //minus 1 to get 0 pos in database
+           //minus 1 to get 0 pos in database
             UpdateBalanceDisplay();
         } 
 
@@ -82,9 +86,11 @@ namespace Loss_Aversion
 
                 // Determine if the participant wins or loses based on probability
                 //string result = Class1.determine_win_loss(Class1.Probability[Class1.count]);
-                resultAmount = Class1.Bet(Class1.count); 
- 
-            UpdateBalanceDisplay(); ///THIS IS AN ISSUE , its the reason the balance is weird !!! this must be at a new page load or something
+                resultAmount = Class1.Bet(Class1.count);
+
+            // UpdateBalanceDisplay(); ///THIS IS AN ISSUE , its the reason the balance is weird !!! this must be at a new page load or something
+            lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 2).ToString();
+            lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 2).ToString();
             //Additially to that we need to show the Win and Loss that obtained in the bet function, the values displayed on the page are inaccurate
             // Move to the next question
             Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count);
