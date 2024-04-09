@@ -11,12 +11,13 @@ namespace Loss_Aversion
 {
     public partial class Question2 : System.Web.UI.Page
     {
-        int Probability = 100;
+        int Probability = 55;
         protected void Page_Load(object sender, EventArgs e)
         {
             // Display the initial question
-            lblQuestions.Text = "You have invested in a stock, and there's news of a Potential  market downturn.";
-            lblProbability.Text = Probability.ToString();
+            lblQuestions.Text = "You hold a portfolio of stocks, and the market experiences high volatility.";
+            lblProbabilitywin.Text = Probability.ToString();
+            lblProbabilityloss.Text = (100 - Probability).ToString();
             //  lblPotentialLoss.Text = Class1.potentialWin(1).ToString();
             // lblPotentialGain.Text = Class1.AmountoBet().ToString();
 

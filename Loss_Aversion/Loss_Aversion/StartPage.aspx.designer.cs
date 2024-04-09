@@ -7,29 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Loss_Aversion.assets
+namespace Loss_Aversion
 {
 
 
-    public partial class WebForm9
+    public partial class StartPage
     {
 
         /// <summary>
-        /// lblResults control.
+        /// divStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResults;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divStart;
 
         /// <summary>
-        /// btnReplay control.
+        /// btnstart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReplay;
+        protected global::System.Web.UI.WebControls.Button btnstart;
     }
 }

@@ -22,7 +22,7 @@ namespace Loss_Aversion
         {
             InsertIntoDatabase();
             Session["Username"] = txtname.Text; //session
-            Response.Redirect("Question1.aspx");
+            Response.Redirect("StartPage.aspx");
             
         }
 

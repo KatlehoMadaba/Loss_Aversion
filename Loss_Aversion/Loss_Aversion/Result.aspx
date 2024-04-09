@@ -12,6 +12,9 @@
                     <asp:Label ID="lblResults" class="fw-bold fs-2" runat="server"></asp:Label>
                 </div>
             </div>
+            <div>
+                <asp:Button ID="btnReplay" runat="server" OnClick="btnReplay_Click"  CssClass="btn btn-success btn-Alosses" Text="Play Again" Width="212px" />
+            </div>
         </div>
     </section>
 </asp:Content>

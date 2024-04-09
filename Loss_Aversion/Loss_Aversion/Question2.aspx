@@ -7,7 +7,8 @@
         <div class="hero-container">
          <h1 data-aos="zoom-in" class="boldHeader">Loss Aversion Game</h1>
             <h2 data-aos="fade-up" class="glowHeading fs-4">Balance: R<asp:Label ID="lblBettedAmount" runat="server"/></h2>
-            <h2 data-aos="fade-up" class="glowHeading fs-4"> Probability of winning: <asp:Label ID="lblProbability" runat="server" />%</h2>
+<h2 data-aos="fade-up" class="glowHeading fs-4"> Probability of winning: <asp:Label ID="lblProbabilitywin" runat="server" />%</h2>
+                        <h2 data-aos="fade-up" class="glowHeading fs-4"> Probability of Losing: <asp:Label ID="lblProbabilityloss" runat="server" />%</h2>
             <div class="card" style="width: 60%; box-shadow: 0 0 20px #00FF00" data-aos="fade-up" >
 
                 <div class="card-header">

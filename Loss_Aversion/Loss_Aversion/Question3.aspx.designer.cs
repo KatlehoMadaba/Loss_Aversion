@@ -24,13 +24,22 @@ namespace Loss_Aversion
         protected global::System.Web.UI.WebControls.Label lblBettedAmount;
 
         /// <summary>
-        /// lblProbability control.
+        /// lblProbabilitywin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProbability;
+        protected global::System.Web.UI.WebControls.Label lblProbabilitywin;
+
+        /// <summary>
+        /// lblProbabilityloss control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProbabilityloss;
 
         /// <summary>
         /// lblQuestions control.

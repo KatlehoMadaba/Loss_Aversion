@@ -166,6 +166,7 @@
     <Content Include="Question5.aspx" />
     <Content Include="Question6.aspx" />
     <Content Include="Result.aspx" />
+    <Content Include="StartPage.aspx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="Web.config" />
     <Content Include="LandingPage.aspx" />
@@ -243,6 +244,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StartPage.aspx.cs">
+      <DependentUpon>StartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StartPage.aspx.designer.cs">
+      <DependentUpon>StartPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

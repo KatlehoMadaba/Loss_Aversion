@@ -7,7 +7,8 @@
         <div class="hero-container">
          <h1 data-aos="zoom-in" class="boldHeader">Loss Aversion Game</h1>
             <h2 data-aos="fade-up" class="glowHeading fs-4">Balance: R<asp:Label ID="lblBettedAmount" runat="server"/></h2>
-            <h2 data-aos="fade-up" class="glowHeading fs-4"> Probability of winning: <asp:Label ID="lblProbability" runat="server" />%</h2>
+            <h2 data-aos="fade-up" class="glowHeading fs-4"> Probability of winning: <asp:Label ID="lblProbabilitywin" runat="server" />%</h2>
+                        <h2 data-aos="fade-up" class="glowHeading fs-4"> Probability of Losing: <asp:Label ID="lblProbabilityloss" runat="server" />%</h2>
 
             <div class="card" style="width: 60%; box-shadow: 0 0 20px #00FF00" data-aos="fade-up" >
 
@@ -17,11 +18,12 @@
                 <div class="card-body" style="display: flex;
     flex-direction: column;
     align-items: center;" data-aos="fade-up">
-
                     <asp:Button ID="btnAlosses" runat="server" style="margin-top:1rem;" CssClass="btn btn-success btn-Alosses" Text="Avoid Losses" Width="212px" OnClick="btnAlosses_Click" />
                     <asp:Button ID="btnGains" runat="server" CssClass="btn btn-success" style="margin-top:1rem;" Text="Gamble" Width="212px" OnClick="btnGains_Click"/>
                 </div>
             </div>
+            
+            
         </div>
     </section>
 
