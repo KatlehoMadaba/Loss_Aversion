@@ -11,15 +11,16 @@ namespace Loss_Aversion
 {
     public partial class Question3 : System.Web.UI.Page
     {
+        int Probability = 100;
         protected void Page_Load(object sender, EventArgs e)
         {
             // Display the initial question
             lblQuestions.Text = "You have invested in a stock, and there's news of a Potential  market downturn.";
+            lblProbability.Text = Probability.ToString();
+            //  lblPotentialLoss.Text = Class1.potentialWin(1).ToString();
+            // lblPotentialGain.Text = Class1.AmountoBet().ToString();
 
-            lblPotentialLoss.Text = Math.Round(Class1.AmountoBet(), 2).ToString();
-            lblPotentialGain.Text = Math.Round(Class1.potentialWin(100), 2).ToString(); //minus 1 to get 0 pos in database
-
-            double Amount = Math.Round((double)Session["Score"], 2);
+            double Amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["Score"]), 2);
             lblBettedAmount.Text = Amount.ToString();
         }
 
@@ -87,11 +88,9 @@ namespace Loss_Aversion
 
             // Determine if the participant wins or loses based on probability
             //string result = Class1.determine_win_loss(Class1.Probability[Class1.count]);
-            resultAmount = Class1.Bet(1);
+            resultAmount = Class1.Bet(Probability);
 
-            // UpdateBalanceDisplay(); ///THIS IS AN ISSUE , its the reason the balance is weird !!! this must be at a new page load or something
-            lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 2).ToString();
-            lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 2).ToString();
+
             //Additially to that we need to show the Win and Loss that obtained in the bet function, the values displayed on the page are inaccurate
             // Move to the next question
             Class1.UpdateDatabase(true, Session["SessionID"].ToString(), 3);

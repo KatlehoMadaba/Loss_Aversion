@@ -11,13 +11,14 @@ namespace Loss_Aversion
 {
     public partial class Question1 : System.Web.UI.Page
     {
+        int Probability = 100;
         protected void Page_Load(object sender, EventArgs e)
         {
                 // Display the initial question
                 lblQuestions.Text = "You have invested in a stock, and there's news of a Potential  market downturn.";
-
-            lblPotentialLoss.Text = Class1.potentialWin(1).ToString();
-            lblPotentialGain.Text = Class1.AmountoBet().ToString();
+                lblProbability.Text = Probability.ToString();
+          //  lblPotentialLoss.Text = Class1.potentialWin(1).ToString();
+           // lblPotentialGain.Text = Class1.AmountoBet().ToString();
 
             double Amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["Score"]), 2);
                 lblBettedAmount.Text = Amount.ToString();
@@ -88,7 +89,7 @@ namespace Loss_Aversion
 
             // Determine if the participant wins or loses based on probability
             //string result = Class1.determine_win_loss(Class1.Probability[Class1.count]);
-            resultAmount = Class1.Bet(1);
+            resultAmount = Class1.Bet(Probability);
             double win = Class1.potentialWin(1);
             double loss = Class1.AmountoBet();
             // UpdateBalanceDisplay(); ///THIS IS AN ISSUE , its the reason the balance is weird !!! this must be at a new page load or something
