@@ -2,10 +2,19 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <section id="hero">
-        <div class="hero-container">
+
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" Visible="false">
+    
+    <section id="hero" >
+        <div id="divStart" class="hero-container" runat="server">
+            <div class="hero-container">
+         <h1 data-aos="zoom-in" class="boldHeader">Press Start to begin</h1>
+            <asp:Button ID="btnstart" runat="server" CssClass="btn btn-success btn-Gains" Text="Start" Width="212px" style="margin-left:20px" OnClick="btnstart_Click" />
+        </div>
+        </div>
+        <div class="hero-container" id="divGame" runat="server">
          <h1 data-aos="zoom-in" class="boldHeader">Loss Aversion Game</h1>
             <h2 data-aos="fade-up" class="glowHeading fs-4">Balance: R<asp:Label ID="lblBettedAmount" runat="server"/></h2>
             <h2 data-aos="fade-up" class="glowHeading fs-4"> Potential Loss: R<asp:Label ID="lblPotentialLoss" runat="server" /></h2>
