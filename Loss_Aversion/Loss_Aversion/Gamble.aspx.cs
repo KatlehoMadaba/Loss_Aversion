@@ -51,6 +51,7 @@ namespace Loss_Aversion
             else
             {
                 double Amount = Math.Round(Class1.Score, 2);
+                //lblBettedAmount.Text = DisplayBalance(Class1.count);
                 lblBettedAmount.Text = Amount.ToString();
             }
 
@@ -113,7 +114,7 @@ namespace Loss_Aversion
             lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 2).ToString();
             Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count);
 
-            Class1.count++;
+            //Class1.count++;
         }
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
@@ -141,6 +142,7 @@ namespace Loss_Aversion
             {
                 double Amount = Math.Round(Class1.Score, 2);
                 lblBettedAmount.Text = Amount.ToString();
+                //lblBettedAmount.Text = DisplayBalance(Class1.count);
             }
             else
             {
@@ -165,16 +167,19 @@ namespace Loss_Aversion
             // Move to the next question
             Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count);
           
-            Class1.count++;
+     
             if (!IsPostBack)
             {
                 double Amount = Math.Round(Class1.Score, 2);
-                lblBettedAmount.Text = Amount.ToString();
+
+                //lblBettedAmount.Text = Amount.ToString();
+                lblBettedAmount.Text = DisplayBalance(Class1.count);
             }
             else
             {
                 //double Amount = Math.Round(Class1.Score, 2);
                 //lblBettedAmount.Text = Amount.ToString();
+                lblBettedAmount.Text = DisplayBalance(Class1.count);
             }
 
             // Check if all questions have been answered
@@ -183,7 +188,7 @@ namespace Loss_Aversion
                 // Update the database and redirect to the result page
                 Response.Redirect("Result.aspx");
             }
-
+            Class1.count++;
         }
 
         private void UpdateBalanceDisplay()
