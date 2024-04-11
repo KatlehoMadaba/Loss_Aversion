@@ -123,12 +123,11 @@ namespace Loss_Aversion
             //Class1.Bet(Class1.count);
 
             Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count);
-            UpdateBalanceDisplay();
             //Class1.Score = Convert.ToDouble(DisplayBalance(Class1.count));
-
+           
             Class1.count++;
-            //lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 2).ToString();
-            //lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 2).ToString();
+            lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 2).ToString();
+            lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 2).ToString();
             // Check if all questions have been answered
             if (Class1.count >= 7)  //make this 7 it was 8
             {
