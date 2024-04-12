@@ -19,7 +19,7 @@ public class Class1
     public static int count = 1;
     public static double Win = 0;
     public static double Loss = 0;
-
+    public static int questCount = 0;
     
     public static double Score = 0;
     //public static double amountToBet ;
@@ -63,28 +63,30 @@ public class Class1
     {
         Random randomAmountToBetPercecnt = new Random();
 
-        double AmountoBet = randomAmountToBetPercecnt.NextDouble() * Score;
+        double AmountoBet = Math.Round(randomAmountToBetPercecnt.NextDouble() * Score,0);
 
         return AmountoBet;
     }
 
     public static double potentialWin(int Index_Prob)
     {
-        double pWin = Convert.ToDouble(Class1.expected_win_amount(Probability[Index_Prob], AmountoBet()));
+        double pWin = Math.Round(Convert.ToDouble(Class1.expected_win_amount(Probability[Index_Prob], AmountoBet())),0);
         return pWin;
 
     }
 
     public static double Bet(int Index_Prob)
-    {
-         double amountToBet = AmountoBet();
-         HttpContext.Current.Session["potentialLoss"]= amountToBet;
-         double potentialWinAmount = potentialWin(Index_Prob-1); //minus one at index
-         HttpContext.Current.Session["potentialWin"] = potentialWinAmount;
-        double potentialLossAmount = amountToBet; // Potential loss is the amount to bet
-
+  {
+        //double amountToBet = AmountoBet();
+        //HttpContext.Current.Session["potentialLoss"]= amountToBet;
+        //double potentialWinAmount = potentialWin(Index_Prob-1); //minus one at index
+        ////HttpContext.Current.Session["potentialWin"] = potentialWinAmount;
+        //double potentialLossAmount = amountToBet; // Potential loss is the amount to bet
+        double potentialLossAmount = Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]);
+        double potentialWinAmount = Convert.ToDouble(HttpContext.Current.Session["potentialWin"]);
+        
             if (determine_win_loss(Probability[Index_Prob -1]) == "win") //minus one at index
-        {
+             {
                 // Add the win amount to the balance
                 Win = potentialWinAmount;
                 Loss = 0;
@@ -99,39 +101,187 @@ public class Class1
                 Score = Score - potentialLossAmount;
             }
 
+           UpdateDatabase(true, HttpContext.Current.Session["SessionID"].ToString(), count - 1);
 
         return Score;
     }
+    public static void genrateFirst(int Index_Prob)
+    {
+        double amountToBet = AmountoBet();
+        HttpContext.Current.Session["potentialLoss"] = amountToBet;
+        double potentialWinAmount = potentialWin(Index_Prob - 1); //minus one at index
+        HttpContext.Current.Session["potentialWin"] = potentialWinAmount;
+        double potentialLossAmount = amountToBet;
+    }
+    public static double noBet()
+    {
+        //Score = Score-DisplayBalance( ;
+        //int balDb = Convert.ToInt32(DisplayBalance(Index_Prob));
+        //int previousW = Convert.ToInt32(displayPotentialW(Index_Prob));
+        //int previousL = Convert.ToInt32(displayPotentialL(Index_Prob));
+        //if (Score>=balDb)
+        //{
+        //    Score = Score - previousW;
+        //}
+        //else
+        //{
+        //    Score = Score + previousL;
+        //}
 
+        //return Score;
+        Win = 0;
+        Loss = 0;
+        Score =Score+ 0;
+        UpdateDatabase(false, HttpContext.Current.Session["SessionID"].ToString(), count - 1);
+        return Score;
 
-
-
-
+    }
     public static void UpdateDatabase(bool decision, string userId, int questIndex)
     {
         string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
 
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                connection.Open();
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            connection.Open();
 
-                string query = $"UPDATE TBL_Loss_AV " +
-                           $"SET Decision{questIndex} = @Decision{questIndex}, Outcome{questIndex} = @Outcome{questIndex}, " +
-                           $"Win{questIndex} = @Win{questIndex}, Loss{questIndex} = @Loss{questIndex} " +
-                           $"WHERE LossAV_ID = @LossAV_ID";
+            string query = $"UPDATE TBL_Loss_AV " +
+                       $"SET Decision{questIndex} = @Decision{questIndex}, Outcome{questIndex} = @Outcome{questIndex}, " +
+                       $"Win{questIndex} = @Win{questIndex}, Loss{questIndex} = @Loss{questIndex} " +
+                       $"WHERE LossAV_ID = @LossAV_ID";
 
-                SqlCommand command = new SqlCommand(query, connection);
+            SqlCommand command = new SqlCommand(query, connection);
 
-                command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
-                command.Parameters.AddWithValue($"Outcome{questIndex}", Math.Round(Score));
-                command.Parameters.AddWithValue("@LossAV_ID", userId);
-                command.Parameters.AddWithValue($"@Win{questIndex}", Math.Round(Win));
-                command.Parameters.AddWithValue($"@Loss{questIndex}", Math.Round(Loss));
+            command.Parameters.AddWithValue($"@Decision{questIndex}", decision.ToString());
+            command.Parameters.AddWithValue($"Outcome{questIndex}", Math.Round(Score));
+            command.Parameters.AddWithValue("@LossAV_ID", userId);
+            command.Parameters.AddWithValue($"@Win{questIndex}", Math.Round(Win));
+            command.Parameters.AddWithValue($"@Loss{questIndex}", Math.Round(Loss));
 
-                command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
         }
-        
+
     }
+    public static string displayPotentialL(int i)
+    {
+        string balance = "Nun";
+        // Connection string to connect to your SQL Server database
+        string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
+        // Concatenate the value of 'i' with the string for column name
+        string columnName = "Loss" + i;
+
+        string query = $"SELECT {columnName} FROM TBL_Loss_AV WHERE LossAV_ID = @ID";
+
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Add parameter for LossAV_ID
+
+                    command.Parameters.AddWithValue("@ID", HttpContext.Current.Session["SessionID"]);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Access the column value using the correct column name
+                            balance = reader[columnName].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+        return balance;
+    }
+    public static string displayPotentialW(int i)
+    {
+        string balance = "Nun";
+        // Connection string to connect to your SQL Server database
+        string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
+        // Concatenate the value of 'i' with the string for column name
+        string columnName = "Win" + i;
+
+        string query = $"SELECT {columnName} FROM TBL_Loss_AV WHERE LossAV_ID = @ID";
+
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Add parameter for LossAV_ID
+
+                    command.Parameters.AddWithValue("@ID", HttpContext.Current.Session["SessionID"]);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Access the column value using the correct column name
+                            balance = reader[columnName].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+        return balance;
+    }
+    public static string DisplayBalance(int i)
+    {
+        string balance = "Nun";
+        // Connection string to connect to your SQL Server database
+        string connString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+
+        // Concatenate the value of 'i' with the string for column name
+        string columnName = "Outcome" + i;
+
+        string query = $"SELECT {columnName} FROM TBL_Loss_AV WHERE LossAV_ID = @ID";
+
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Add parameter for LossAV_ID
+
+                    command.Parameters.AddWithValue("@ID", HttpContext.Current.Session["SessionID"]);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Access the column value using the correct column name
+                            balance = reader[columnName].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+        return balance;
+    }
+    
    
 
 

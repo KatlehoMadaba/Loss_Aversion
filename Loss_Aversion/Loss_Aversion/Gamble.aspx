@@ -26,8 +26,7 @@
                 </div>
                 <div class="card-body" style="display: flex;
     flex-direction: column;
-    align-items: center;" data-aos="fade-up">
-
+    align-items: center;" data-aos="fade-up"> 
                     <asp:Button ID="btnAlosses" runat="server" style="margin-top:1rem;" CssClass="btn btn-success btn-Alosses" Text="Avoid Losses" Width="212px" OnClick="btnAlosses_Click" />
                     <asp:Button ID="btnGains" runat="server" CssClass="btn btn-success" style="margin-top:1rem;" Text="Gamble" Width="212px" OnClick="btnGains_Click"/>
                 </div>

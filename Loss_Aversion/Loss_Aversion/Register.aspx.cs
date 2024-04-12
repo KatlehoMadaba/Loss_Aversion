@@ -13,8 +13,9 @@ namespace Loss_Aversion
             if (Class1.Score == 0)
             {
                 Class1.Score = 1000.00;
-
+                
             }
+
         }
 
         
@@ -47,5 +48,6 @@ namespace Loss_Aversion
 
             }
         }
+
     }
 }
