@@ -5,8 +5,8 @@ using System.Web;
 
 public class Class1
 {
-    //public static double[] Probability = { 95, 90, 85, 80, 50, 10 };
-    public static double[] Probability = { 95, 90, 85, 80, 50, 10,34 };
+    public static double[] Probability = { 95, 90, 85, 80, 50, 10 };
+    //public static double[] Probability = { 95, 90, 85, 80, 50, 10,34 };
 
     public static string[] Questions = {    "You have invested in a stock, and there's news of a Potential  market downturn.",
                                             "You hold a portfolio of stocks, and the market experiences high volatility.",
