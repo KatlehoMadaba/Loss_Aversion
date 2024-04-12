@@ -5,8 +5,9 @@ using System.Web;
 
 public class Class1
 {
-    public static double[] Probability = { 95, 90, 85, 80, 50, 10 };
-    
+    //public static double[] Probability = { 95, 90, 85, 80, 50, 10 };
+    public static double[] Probability = { 95, 90, 85, 80, 50, 10,34 };
+
     public static string[] Questions = {    "You have invested in a stock, and there's news of a Potential  market downturn.",
                                             "You hold a portfolio of stocks, and the market experiences high volatility.",
                                             "One of the companies in your portfolio is about to release its earnings report, and there are mixed predictions.",
@@ -75,6 +76,7 @@ public class Class1
 
     }
 
+    //For when you gamble
     public static double Bet(int Index_Prob)
   {
         //double amountToBet = AmountoBet();
@@ -105,6 +107,7 @@ public class Class1
 
         return Score;
     }
+    //Genrate PL and PW for the next page/ scenrio
     public static void genrateFirst(int Index_Prob)
     {
         double amountToBet = AmountoBet();
@@ -113,22 +116,10 @@ public class Class1
         HttpContext.Current.Session["potentialWin"] = potentialWinAmount;
         double potentialLossAmount = amountToBet;
     }
+
+    //For when you avoid the loss
     public static double noBet()
     {
-        //Score = Score-DisplayBalance( ;
-        //int balDb = Convert.ToInt32(DisplayBalance(Index_Prob));
-        //int previousW = Convert.ToInt32(displayPotentialW(Index_Prob));
-        //int previousL = Convert.ToInt32(displayPotentialL(Index_Prob));
-        //if (Score>=balDb)
-        //{
-        //    Score = Score - previousW;
-        //}
-        //else
-        //{
-        //    Score = Score + previousL;
-        //}
-
-        //return Score;
         Win = 0;
         Loss = 0;
         Score =Score+ 0;
