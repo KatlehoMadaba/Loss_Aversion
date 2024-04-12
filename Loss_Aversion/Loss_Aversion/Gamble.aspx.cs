@@ -68,7 +68,7 @@ namespace Loss_Aversion
         }
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
-            if (Class1.count <=7)
+            if (Class1.count <= 7)
             {
                 // Reset session variables for Win and Loss
                 Class1.Win = 0;
@@ -82,7 +82,6 @@ namespace Loss_Aversion
                
 
                 Class1.count++;
-
             }
             else
             {
