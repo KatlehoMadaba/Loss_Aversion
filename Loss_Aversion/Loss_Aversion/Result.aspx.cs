@@ -39,5 +39,10 @@ namespace Loss_Aversion.assets
                 command.ExecuteNonQuery();
             }
         }
+
+        protected void btnTryAgain_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LandingPage.aspx");
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace Loss_Aversion
                 lblQuestions.Text = Class1.Questions[Class1.count-1].ToString();
               
             }
-            else if(Class1.count ==7)
+            else if(Class1.count == 8)
             {
                 Response.Redirect("Result.aspx");
             }
@@ -68,7 +68,7 @@ namespace Loss_Aversion
         }
         protected void btnAlosses_Click(object sender, EventArgs e)
         {
-            if (Class1.count < 7)
+            if (Class1.count < 8)
             {
                 // Reset session variables for Win and Loss
                 Class1.Win = 0;
@@ -87,13 +87,18 @@ namespace Loss_Aversion
             {
                 Response.Redirect("Result.aspx");
             }
-        
-           
+
+            if (Class1.count == 8)
+            {
+                Response.Redirect("Result.aspx");
+            }
+
+
 
         }
         protected void btnGains_Click(object sender, EventArgs e)
         {
-            if (Class1.count < 7)
+            if (Class1.count < 8)
             {
                 Class1.Bet(Class1.count);
 
@@ -117,6 +122,11 @@ namespace Loss_Aversion
 
                     double Amount = Math.Round(Class1.Score, 2);
                     lblBettedAmount.Text = Amount.ToString();
+                }
+
+                if (Class1.count == 8)
+                {
+                    Response.Redirect("Result.aspx");
                 }
             }
             else

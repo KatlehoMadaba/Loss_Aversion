@@ -12,6 +12,10 @@
                     <asp:Label ID="lblResults" class="fw-bold fs-2" runat="server"></asp:Label>
                 </div>
             </div>
+            <div style="margin-top:50px;">
+                <asp:Button ID="btnTryAgain" runat="server" CssClass="btn btn-success btn-Gains" Text="Try Again" Width="212px" Style="margin-left: 20px" OnClick="btnTryAgain_Click" />
+            </div>
         </div>
+
     </section>
 </asp:Content>
