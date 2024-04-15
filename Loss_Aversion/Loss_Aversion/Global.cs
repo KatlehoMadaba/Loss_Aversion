@@ -86,10 +86,12 @@ public class Class1
         //double potentialLossAmount = amountToBet; // Potential loss is the amount to bet
         double potentialLossAmount = Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]);
         double potentialWinAmount = Convert.ToDouble(HttpContext.Current.Session["potentialWin"]);
-        
+        string W_Lsession;
             if (determine_win_loss(Probability[Index_Prob -1]) == "win") //minus one at index
              {
-                // Add the win amount to the balance
+            // Add the win amount to the balance
+                W_Lsession = "WIN";
+                HttpContext.Current.Session["W_Lsession"] = W_Lsession;
                 Win = potentialWinAmount;
                 Loss = 0;
                 Score = Score + potentialWinAmount;
@@ -97,7 +99,9 @@ public class Class1
             }
             else
             {
-                // Subtract the loss amount from the balance
+            // Subtract the loss amount from the balance
+                W_Lsession = "LOST";
+                HttpContext.Current.Session["W_Lsession"] = W_Lsession;
                 Win = 0;
                 Loss = potentialLossAmount;
                 Score = Score - potentialLossAmount;

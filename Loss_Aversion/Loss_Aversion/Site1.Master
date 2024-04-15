@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <title>Loss Aversion</title>
-
+  
     <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -27,6 +27,7 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/StyleSheet1.css" rel="stylesheet" />
@@ -49,9 +50,10 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
+  <script src="assets/js/allJs.aspx"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+<script src="assets/js/bootstrap5.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

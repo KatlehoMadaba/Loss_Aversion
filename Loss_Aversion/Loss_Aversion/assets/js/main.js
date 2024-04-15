@@ -5,6 +5,14 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+function showAlert() {
+    Swal.fire({
+        title: 'Hello!',
+        text: 'This is a SweetAlert2 alert!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });
+}
 window.onload = function () {
     var width = window.innerWidth * 0.1; // Calculate 60% of the screen width
     var height = window.innerHeight * 0.1; // Calculate 60% of the screen height

@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web;
+using System.Web.UI;
 
 namespace Loss_Aversion
 {
@@ -74,14 +75,23 @@ namespace Loss_Aversion
                 Class1.Win = 0;
                 Class1.Loss = 0;
                 
+                // Display the SweetAlert2 alert using JavaScript
+               
                 lblBettedAmount.Text = Class1.noBet().ToString();
+                bool won = false;
+                if (HttpContext.Current.Session["W_Lsession"].ToString() == "WIN")
+                {
+                    won = true;
+
+                }
+                string amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
+                ScriptManager.RegisterStartupScript(this, GetType(), "showLpopup", "avoidLossPopup(" + won.ToString().ToLower() + ", '" + amount + "');", true);
                 //Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count - 1);
                 Class1.genrateFirst(Class1.count);
                 lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 0).ToString();
                 lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
-               
-
                 Class1.count++;
+             
             }
             else
             {
@@ -104,7 +114,14 @@ namespace Loss_Aversion
 
                 //Class1.UpdateDatabase(true, Session["SessionID"].ToString(), Class1.count - 1);
                 Class1.genrateFirst(Class1.count);
+                bool won = false;
+                if (HttpContext.Current.Session["W_Lsession"].ToString() == "WIN")
+                {
+                    won = true;
 
+                }
+                string amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
+                ScriptManager.RegisterStartupScript(this, GetType(), "showGpopup", "GainsPopup(" + won.ToString().ToLower() + ", '" + amount + "');", true);
                 lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 0).ToString();
                 lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
                 //Additially to that we need to show the Win and Loss that obtained in the bet function, the values displayed on the page are inaccurate
@@ -112,6 +129,7 @@ namespace Loss_Aversion
               
 
                 Class1.count++;
+                
                 if (!IsPostBack)
                 {
                     double Amount = Math.Round(Class1.Score, 0);
@@ -147,6 +165,14 @@ namespace Loss_Aversion
             lblBettedAmount.Text = Amount.ToString();
         }
 
-   
+        protected void modalbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void testbtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
