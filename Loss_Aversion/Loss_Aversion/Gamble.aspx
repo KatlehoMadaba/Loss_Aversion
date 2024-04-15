@@ -75,15 +75,13 @@
                  }
              });
          }
-         function GainsPopup((won, amount) {
-             let title = "";
-             let timerInterval;
+         function GainsPopup(won, amount) {
              let title = "";
              if (won) {
-                 title = "You could have won:R" + amount;
+                 title = "Opps you missed out on :R" + amount;
              }
              else {
-                 title = "Great choice you avoided a loss of:R" + amount;
+                 title = "Great choice you almost lost :R" + amount;
              }
              Swal.fire({
                  title: title,

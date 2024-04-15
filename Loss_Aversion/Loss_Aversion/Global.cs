@@ -106,9 +106,7 @@ public class Class1
                 Loss = potentialLossAmount;
                 Score = Score - potentialLossAmount;
             }
-
            UpdateDatabase(true, HttpContext.Current.Session["SessionID"].ToString(), count - 1);
-
         return Score;
     }
     //Genrate PL and PW for the next page/ scenrio
@@ -122,12 +120,33 @@ public class Class1
     }
 
     //For when you avoid the loss
-    public static double noBet()
+    public static double noBet(int Index_Prob)
     {
         Win = 0;
         Loss = 0;
         Score =Score+ 0;
-        UpdateDatabase(false, HttpContext.Current.Session["SessionID"].ToString(), count - 1);
+
+        double amountToBet = AmountoBet();
+        HttpContext.Current.Session["nobetLoss"] = amountToBet;
+        double noBetloss = amountToBet;
+
+        double noBetwin= potentialWin(Index_Prob - 1);
+        HttpContext.Current.Session["nobetWin"] = noBetwin;
+
+        string W_Lsession;
+        if (determine_win_loss(Probability[Index_Prob - 1]) == "win") //minus one at index
+        {
+            // Add the win amount to the balance
+            W_Lsession = "WIN";
+            HttpContext.Current.Session["W_Lsession"] = W_Lsession;
+        }
+        else
+        {
+            // Subtract the loss amount from the balance
+            W_Lsession = "LOST";
+            HttpContext.Current.Session["W_Lsession"] = W_Lsession;
+        }
+        
         return Score;
 
     }
