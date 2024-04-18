@@ -3,6 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        .swal-progress-bar {
+  width: 100%; /* Match the width of the alert */
+  height: 10px; /* Define the height of the bar */
+  background-color: #ddd; /* Background color for the entire bar */
+}
+
+.swal-progress {
+  height: 100%; /* Match the height of the bar container */
+  background-color: #007bff; /* Color for the progress fill */
+  transition: width 1s ease-out; /* Animation for filling the bar */
+}
         /* Customize the SweetAlert popup */
         .swal2-popup {
          /*    font-family: 'Press Start 2P', cursive; */
@@ -13,6 +24,18 @@
             border: 2px solid #4CAF50; /* Border color */
             border-radius: 10px;
             box-shadow: 0 0 10px #4CAF50;    /* Green glow effect , maybe this one is better idunno*/ 
+          /*  box-shadow: 0 0 20px #00FF00;  Glowing effect */
+            color: white; /* Text color */
+        }
+          .swal3-popup {
+         /*    font-family: 'Press Start 2P', cursive; */
+          /* font-family: "Rubik Dirt" , system-ui; */ 
+            font-family:Arial; /*I really cant decide on a font :(  */
+            font-weight:bold;
+            background-color: black; /* Background color */
+            border: 2px solid #ff0000; /* Border color */
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ff0000;    /* Green glow effect , maybe this one is better idunno*/ 
           /*  box-shadow: 0 0 20px #00FF00;  Glowing effect */
             color: white; /* Text color */
         }
@@ -62,7 +85,7 @@
         <div class="hero-container" id="divGame" runat="server">
          <h1 data-aos="zoom-in" class="boldHeader">Loss Aversion Game</h1>
             <h2 data-aos="fade-up" class="glowHeading fs-4">Balance: R<asp:Label ID="lblBettedAmount" runat="server"/></h2>
-            <h2 data-aos="fade-up" class="glowHeading fs-4"> Potential Loss: R<asp:Label ID="lblPotentialLoss" runat="server" /></h2>
+            <h2 data-aos="fade-up" class="glowHeadingRed fs-4"> Potential Loss: R<asp:Label ID="lblPotentialLoss" runat="server" /></h2>
              <h2 data-aos="fade-up" class="glowHeading fs-4"> Potential Win: R<asp:Label ID="lblPotentialGain" runat="server" /></h2>
             <div class="card" style="width: 60%; box-shadow: 0 0 20px #00FF00" data-aos="fade-up" >
 
@@ -79,13 +102,13 @@
         </div>
     </section>
      <script>
-         function avoidLossPopup(won,amount) {
+         function avoidLossPopup(won, amount, amountLoss) {
              let title = "";
              if (won) {
-                 title = "You could have won:R" + amount;
+                 title = "Opps would have won R"+amount;
              }
              else {
-                 title = "Great choice you avoided a loss of:R" + amount;
+                 title = "  Great choice you could have lost R" + amountLoss;
              }
              Swal.fire({
                  title: title,
@@ -104,8 +127,11 @@
                     left top
                     no-repeat`,
                  timerProgressBar: true,
+
                  didOpen: () => {
+
                      Swal.showLoading();
+                    
                      const timer = Swal.getPopup().querySelector("b");
                      timerInterval = setInterval(() => {
                          timer.textContent = `${Swal.getTimerLeft()}`;
@@ -121,13 +147,13 @@
                  }
              });
          }
-         function GainsPopup(won, amount) {
+         function GainsPopup(won, amount,amountLoss) {
              let title = "";
              if (won) {
-                 title = "Opps you missed out on :R" + amount;
+                 title = "  Great you won R" + amount;
              }
              else {
-                 title = "Great choice you almost lost :R" + amount;
+                 title = " Opps you lost R" + amountLoss;
              }
              Swal.fire({
                  title: title,

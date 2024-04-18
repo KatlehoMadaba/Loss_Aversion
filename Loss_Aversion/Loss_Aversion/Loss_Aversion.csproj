@@ -67,8 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\js\allJs.aspx" />
-    <Content Include="assets\js\AlltheJs.aspx" />
     <Content Include="assets\css\StyleSheet1.css" />
     <Content Include="assets\img\about.jpg" />
     <Content Include="assets\img\apple-touch-icon.png" />
@@ -170,20 +168,6 @@
     <Content Include="Register.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="assets\js\allJs.aspx.cs">
-      <DependentUpon>allJs.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="assets\js\allJs.aspx.designer.cs">
-      <DependentUpon>allJs.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="assets\js\AlltheJs.aspx.cs">
-      <DependentUpon>AlltheJs.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="assets\js\AlltheJs.aspx.designer.cs">
-      <DependentUpon>AlltheJs.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Result.aspx.cs">
       <DependentUpon>Result.aspx</DependentUpon>

@@ -62,7 +62,9 @@ namespace Loss_Aversion
                 divGame.Visible = true;
                 Class1.genrateFirst(Class1.count);
                 lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 0).ToString();
+                HttpContext.Current.Session["PreviouspotentialLoss"] = HttpContext.Current.Session["potentialLoss"];
                 lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
+                HttpContext.Current.Session["PreviouspotentialWin"]= HttpContext.Current.Session["potentialWin"];
                 Class1.count++;
         
          
@@ -86,13 +88,19 @@ namespace Loss_Aversion
                     won = true;
 
                 }
-                string amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["nobetWin"]), 0).ToString();
-                string amountLoss = Math.Round(Convert.ToDouble(HttpContext.Current.Session["nobetLoss"]), 0).ToString();
-                ScriptManager.RegisterStartupScript(this, GetType(), "showLpopup", "avoidLossPopup(" + won.ToString().ToLower() + ", '" + amount + "');", true);
+                //string amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["PreviouspotentialWin"]), 0).ToString();
+                //string amountLoss = Math.Round(Convert.ToDouble(HttpContext.Current.Session["PreviouspotentialLoss"]), 0).ToString();
                 //Class1.UpdateDatabase(false, Session["SessionID"].ToString(), Class1.count - 1);
+               
+                string amountLoss = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 0).ToString();
+                string amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
+                ScriptManager.RegisterStartupScript(this, GetType(), "showLpopup", "avoidLossPopup(" + won.ToString().ToLower() + ", '" + amount + "', '" + amountLoss + "');", true);
                 Class1.genrateFirst(Class1.count);
                 lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 0).ToString();
                 lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
+         
+               
+
                 Class1.count++;
              
             }
@@ -123,8 +131,9 @@ namespace Loss_Aversion
                     won = true;
 
                 }
+                string amountLoss = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 0).ToString();
                 string amount = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();
-                ScriptManager.RegisterStartupScript(this, GetType(), "showGpopup", "GainsPopup(" + won.ToString().ToLower() + ", '" + amount + "');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showLpopup", "GainsPopup(" + won.ToString().ToLower() + ", '" + amount + "', '" + amountLoss + "');", true);
                 Class1.genrateFirst(Class1.count);
                 lblPotentialLoss.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialLoss"]), 0).ToString();
                 lblPotentialGain.Text = Math.Round(Convert.ToDouble(HttpContext.Current.Session["potentialWin"]), 0).ToString();

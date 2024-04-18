@@ -189,11 +189,16 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow effect */
     text-align: center; /* Centering the text */
 }
-    .glowHeading {
-        margin-top: 0;
-        color: #333; /* Color of the title */
-        text-shadow: 0 0 8px #00FF00; /* Green glow effect */
-    }
+.glowHeadingRed {
+    margin-top: 0;
+    color: #f21717; /* Color of the title */
+    text-shadow: 0 0 8px #00FF00; /* Green glow effect */
+}
+.glowHeading {
+    margin-top: 0;
+    color: #333; /* Color of the title */
+    text-shadow: 0 0 8px #00FF00; /* Green glow effect */
+}
     .display-box p {
         color: #666; /* Color of the text */
         line-height: 1.5; /* Line height of the text */
