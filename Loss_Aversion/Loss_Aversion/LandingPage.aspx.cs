@@ -11,6 +11,11 @@ namespace Loss_Aversion
             // This method is called when the page is loaded.
             // It can be used to perform any initialization tasks.
             // Currently, it's empty because no initialization is needed.
+            Class1.count = 1;
+            Class1.Win = 0;
+            Class1.Loss = 0;
+            Class1.questCount = 0;
+            Class1.Score = 0;
         }
 
         protected void btnNext_Click1(object sender, EventArgs e)

@@ -96,7 +96,7 @@
     flex-direction: column;
     align-items: center;" data-aos="fade-up"> 
                     <asp:Button ID="btnAlosses" runat="server" style="margin-top:1rem;" CssClass="btn btn-success btn-Alosses" Text="Avoid Losses" Width="212px" OnClick="btnAlosses_Click" OnClientClick="showLpopup() return false;"/>
-                    <asp:Button ID="btnGains" runat="server" CssClass="btn btn-success" style="margin-top:1rem;" Text="Gamble" Width="212px" OnClick="btnGains_Click" OnClientClick="showGpopup() return false;"/>
+                    <asp:Button ID="btnGains" runat="server" CssClass="btn btn-success" style="margin-top:1rem;" Text="Invest" Width="212px" OnClick="btnGains_Click" OnClientClick="showGpopup() return false;"/>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
          function avoidLossPopup(won, amount, amountLoss) {
              let title = "";
              if (won) {
-                 title = "Opps would have won R"+amount;
+                 title = "Oops would have won R"+amount;
              }
              else {
                  title = "  Great choice you could have lost R" + amountLoss;
@@ -153,7 +153,7 @@
                  title = "  Great you won R" + amount;
              }
              else {
-                 title = " Opps you lost R" + amountLoss;
+                 title = " Oops you lost R" + amountLoss;
              }
              Swal.fire({
                  title: title,

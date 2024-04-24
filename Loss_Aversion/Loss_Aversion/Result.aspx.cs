@@ -43,6 +43,11 @@ namespace Loss_Aversion.assets
         protected void btnTryAgain_Click(object sender, EventArgs e)
         {
             Response.Redirect("LandingPage.aspx");
-        }
+            Class1.count = 1;
+            Class1.Win = 0;
+            Class1.Loss = 0;
+            Class1.questCount = 0;
+            Class1.Score = 0;
+    }
     }
 }
